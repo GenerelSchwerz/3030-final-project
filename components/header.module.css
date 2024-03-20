@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    display: flex;
+    background-color: red;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    padding: 10px 0;
+}
+
+
+.headerSelection {
+    display: flex;
+    max-width: 40vw;
+    width: 30vw;
+    list-style: none;
+    justify-content: space-around;
+}
