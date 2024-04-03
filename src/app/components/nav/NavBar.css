@@ -13,7 +13,7 @@
 
 .nav-bar_topDiv input,
 .nav-bar_topDiv button {
-	background-color: white;
+	background-color: var(--color-main-accent);
 }
 
 .nav-bar_topDiv input {
@@ -21,7 +21,7 @@
 }
 
 .nav-bar_topDiv button:hover {
-	background-color: gray;
+	background-color: var(--color-hover);
 }
 
 .nav-bar_bottomDiv {
@@ -39,5 +39,5 @@
 
 .nav-bar_bottomDiv *:hover {
 	text-decoration: underline;
-	background-color: white;
+	background-color: var(--color-hover);
 }
