@@ -1,14 +1,27 @@
-.nav-bar_topDiv {
-	display: grid;
-	grid-template-columns: 1.5fr 3fr .7fr .7fr;
-	height: 40px;
+.nav-bar {
+	height: 50%;
 }
 
-.nav-bar_topDiv * {
-	border-radius: 30px;
-	border: none;
-	margin: 5px 30px 5px 30px;
+.nav-bar_topDiv {
+	display: grid;
+	grid-template-columns: 1.5fr 3fr 1.4fr;
+}
+
+.nav-bar_topDiv input,
+.nav-bar_buttonGroup button,
+.nav-bar_topDiv h1 {
 	box-sizing: border-box;
+	border-radius: 30px;
+	margin: 5px 30px 5px 30px;
+}
+
+.nav-bar_buttonGroup {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.nav-bar_buttonGroup button {
+	width: 40%;
 }
 
 .nav-bar_topDiv input,

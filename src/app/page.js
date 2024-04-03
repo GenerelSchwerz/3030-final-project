@@ -5,7 +5,7 @@ import "./global.css"
 export default function Home() {
   return (
 	<main>
-		<NavBar />
+		<NavBar auth={true}/>
 		<SliderBar />
 	</main>
   );

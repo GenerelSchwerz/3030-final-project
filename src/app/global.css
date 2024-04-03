@@ -13,3 +13,7 @@
 	--color-hover2: red;
 
 }
+
+body { 
+	height: 100vh; 
+}
