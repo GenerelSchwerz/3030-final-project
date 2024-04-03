@@ -3,16 +3,17 @@
 	flex-direction: column;
 }
 
+.sliderBar * {
+	background-color: white;
+}
 
 .sliderBar_Images {
 	display: flex;
 	justify-content: center;
-	
 }
 
 .sliderBar_Images img {
-	height: 300px;
-	width: 300px;
+	padding: 0px 20px 0px 20px;
 }
 
 .sliderBar_Dots {
@@ -23,9 +24,7 @@
 .sliderBar_dot {
 	width: 20px;
 	height: 20px;
-	border-color: purple;
-	border: 2px 2px 2px 2px;
-
-	background-color: black;
-	margin: 0px 5px 0px 5px;
+	border-radius: 50%;
+	background-color: gray;
+	margin: 5px 5px 5px 5px;
 }

@@ -16,7 +16,16 @@
 	background-color: white;
 }
 
+.nav-bar_topDiv input {
+	padding: 10px;
+}
+
+.nav-bar_topDiv button:hover {
+	background-color: gray;
+}
+
 .nav-bar_bottomDiv {
+	padding: 5px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -26,4 +35,9 @@
 .nav-bar_bottomDiv * {
 	border: none;
 	width: 6%;
+}
+
+.nav-bar_bottomDiv *:hover {
+	text-decoration: underline;
+	background-color: white;
 }

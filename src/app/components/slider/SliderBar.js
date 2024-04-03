@@ -5,9 +5,9 @@ const SliderBar = props => {
 	return (
 		<div className="sliderBar">
 			<div className="sliderBar_Images">
-				<img src={"/next.svg"} />
-				<img src={"/next.svg"}/>
-				<img src={"/next.svg"}/>
+				<img src={"/slider_beigeDunks.png"} />
+				<img src={"/slider_grayDunks.png"}/>
+				<img src={"/slider_lilacDunks.png"}/>
 			</div>
 			<div className="sliderBar_Dots">
 				<div className="sliderBar_dot"></div>
