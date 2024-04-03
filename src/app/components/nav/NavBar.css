@@ -2,7 +2,6 @@
 	display: grid;
 	grid-template-columns: 1.5fr 3fr .7fr .7fr;
 	height: 40px;
-	background-color: red;
 }
 
 .nav-bar_topDiv * {
@@ -12,20 +11,15 @@
 	box-sizing: border-box;
 }
 
-.nav-bar_topDiv h1 {
-}
-
-.nav-bar_topDiv input {
-}
-
+.nav-bar_topDiv input,
 .nav-bar_topDiv button {
+	background-color: white;
 }
 
 .nav-bar_bottomDiv {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	background-color: white;
 	height: 35px;
 }
 
