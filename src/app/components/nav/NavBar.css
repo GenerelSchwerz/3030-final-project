@@ -1,0 +1,35 @@
+.nav-bar_topDiv {
+	display: grid;
+	grid-template-columns: 1.5fr 3fr .7fr .7fr;
+	height: 40px;
+	background-color: red;
+}
+
+.nav-bar_topDiv * {
+	border-radius: 30px;
+	border: none;
+	margin: 5px 30px 5px 30px;
+	box-sizing: border-box;
+}
+
+.nav-bar_topDiv h1 {
+}
+
+.nav-bar_topDiv input {
+}
+
+.nav-bar_topDiv button {
+}
+
+.nav-bar_bottomDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: white;
+	height: 35px;
+}
+
+.nav-bar_bottomDiv * {
+	border: none;
+	width: 6%;
+}
