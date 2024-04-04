@@ -1,7 +1,9 @@
+.nav-bar {
+}
+
 .nav-bar_topDiv {
 	display: grid;
 	grid-template-columns: 1.5fr 3fr .7fr .7fr;
-	height: 40px;
 }
 
 .nav-bar_topDiv * {
