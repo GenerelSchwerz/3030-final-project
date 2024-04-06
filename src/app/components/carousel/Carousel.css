@@ -22,6 +22,7 @@
 .carousel_Images img {
 	padding: 5px 5px 5px 5px;
 	margin: 0px 20px 0px;
+	height:300px;
 }
 
 .carousel_Images img:hover {

@@ -1,0 +1,7 @@
+.item-list {
+}
+
+.item-list ul {
+	display: flex;
+	justify-content: space-evenly;
+}

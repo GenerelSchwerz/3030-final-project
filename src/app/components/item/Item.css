@@ -1,0 +1,20 @@
+.item {
+	height: 20%
+}
+
+.item * {
+	background-color: white;
+}
+
+.item_Text {
+	display: flex;
+	justify-content: space-between;
+}
+
+.item_Text * {
+	margin: 5px 5px 5px 5px;
+}
+
+.item img {
+	height: auto;
+}

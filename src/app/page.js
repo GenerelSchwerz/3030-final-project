@@ -2,13 +2,25 @@
 
 import NavBar from "./components/nav/NavBar";
 import Carousel from "./components/carousel/Carousel";
-import "./global.css"
+import ItemList from "./components/item-list/ItemList"
 
 export default function Home() {
+
+	const data = [
+		{src: "/slider_beigeDunks.png",
+		price: 1},
+
+		{src: "/slider_grayDunks.png",
+		price: 2},
+
+		{src: "/slider_lilacDunks.png",
+		price: 3}]
+
   return (
-	<main>
+	<>
 		<NavBar auth={true}/>
 		<Carousel />
-	</main>
+		<ItemList items={data}/>
+	</>
   );
 }

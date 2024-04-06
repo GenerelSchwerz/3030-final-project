@@ -6,7 +6,7 @@ export default function NavBar(props) {
 			<div className='nav-bar_topDiv'>
 				<h1>cosmic commerse</h1>
 				<input type="text" placeholder="Search.." />
-				{(() => 
+				{(() =>
 				{
 					switch (props.auth) {
 						case true: return (
