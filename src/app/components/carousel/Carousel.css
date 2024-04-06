@@ -1,7 +1,7 @@
 .carousel {
-	/* display: flex;
-	flex-direction: column; */
 	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .carousel * {
@@ -10,13 +10,13 @@
 
 .carousel_Images {
 	display: flex;
-	justify-content: center;
 	flex-wrap: nowrap;
 	overflow: hidden;
 }
 
 .carousel_Item {
 	min-width: 100%;
+	text-align: center;
 }
 
 .carousel_Images img {
