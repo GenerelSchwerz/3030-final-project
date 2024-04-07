@@ -58,6 +58,8 @@ const carousel = props => {
 				return (
 					<div key={idx} className="carousel_Item" style={{transform: `translate(-${carouselPosition}%)`}}>
 						<img src={element} key={idx}/>
+						<img src={element} key={idx}/>
+						<img src={element} key={idx}/>
 					</div>
 				);
 			})
