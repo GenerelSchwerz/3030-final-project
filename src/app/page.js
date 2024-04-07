@@ -7,14 +7,23 @@ import ItemList from "./components/item-list/ItemList"
 export default function Home() {
 
 	const data = [
-		{src: "/slider_beigeDunks.png",
+		{src: "/item_GreenCan.png",
 		price: 1},
 
-		{src: "/slider_grayDunks.png",
+		{src: "/item_GreenCan.png",
 		price: 2},
 
-		{src: "/slider_lilacDunks.png",
-		price: 3}]
+		{src: "/item_GreenCan.png",
+		price: 3},
+
+		{src: "/item_GreenCan.png",
+		price: 4},
+
+		{src: "/item_GreenCan.png",
+		price: 5},
+
+		{src: "/item_GreenCan.png",
+		price: 6}]
 
   return (
 	<>

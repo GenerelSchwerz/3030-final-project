@@ -1,7 +1,16 @@
 .item-list {
+	height: 50%;
+	margin: 1% 5%;
 }
 
-.item-list ul {
+.item-list_Text {
+	display: flex;
+	justify-content: space-between;
+}
+
+.item-list_Images {
+	height: 90%;
 	display: flex;
 	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
