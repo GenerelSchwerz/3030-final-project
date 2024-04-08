@@ -1,16 +1,37 @@
 .nav-bar {
+	height: 10%;
+	display: flex;
+	flex-direction: column;
 }
 
 .nav-bar_topDiv {
 	display: grid;
-	grid-template-columns: 1.5fr 3fr .7fr .7fr;
+	grid-template-columns: 1.5fr 3fr 1.4fr;
+	height: 60%;
 }
 
-.nav-bar_topDiv * {
-	border-radius: 30px;
-	border: none;
-	margin: 5px 30px 5px 30px;
+.nav-bar_bottomDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 40%;
+}
+
+.nav-bar_topDiv input,
+.nav-bar_buttonGroup button,
+.nav-bar_topDiv h1 {
 	box-sizing: border-box;
+	border-radius: 30px;
+	margin: 5px;
+}
+
+.nav-bar_buttonGroup {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.nav-bar_buttonGroup button {
+	width: 40%;
 }
 
 .nav-bar_topDiv input,
@@ -19,19 +40,11 @@
 }
 
 .nav-bar_topDiv input {
-	padding: 10px;
+	padding: 1%;
 }
 
 .nav-bar_topDiv button:hover {
 	background-color: var(--color-hover);
-}
-
-.nav-bar_bottomDiv {
-	padding: 5px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	height: 35px;
 }
 
 .nav-bar_bottomDiv * {
