@@ -12,7 +12,7 @@ export default function NavBar(props) {
 					switch (props.auth) {
 						case true: return (
 							<div className='nav-bar_buttonGroup'>
-								<button type="button" className='nav-bar_home'><Link href="/AddItem">Add Item</Link></button>
+								<button type="button" className='nav-bar_home'><Link href="/add-item">Add Item</Link></button>
 								<button type="button" className='nav-bar_support'><Link href="/">Log Out</Link></button>
 							</div>
 						);
