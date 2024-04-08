@@ -1,7 +1,7 @@
 .item {
 	height: 100%;
 	width: 33%;
-	margin: 1px 1px;
+	margin: 2px 2px;
 	background-color: gray;
 	display: flex;
 	flex-direction: column;
@@ -14,6 +14,7 @@
 .item img {
 	height: 80%;
 	width: 100%;
+	object-fit: cover;
 	vertical-align: middle;
 	align-self: center;
 }
@@ -26,4 +27,8 @@
 
 .item_Text h3 {
 	margin: 5px 5px 5px 5px;
+}
+
+.model {
+	align-self: center;
 }

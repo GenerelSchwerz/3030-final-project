@@ -5,7 +5,8 @@
 
 .item-list_Text {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	align-items: center;
 }
 
 .item-list_Images {
@@ -14,3 +15,4 @@
 	justify-content: space-evenly;
 	flex-wrap: wrap;
 }
+
