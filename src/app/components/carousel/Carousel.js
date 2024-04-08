@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./Carousel.css"
 
-const carousel = props => {
+export default function Carousel(props) {
 
 	//Notes
-	//There are three divs that are used to change the carousel position, with IDs 0, 1, 2
+	//There are three divs (dots on the bottom) that are used to change the carousel position, with IDs 0, 1, 2
 	//When a user clicks one of the divs, the stateTarget moves to the divs ID * 100
 	//Via useEffect, carouselPosition will update 1 number at a time till it reaches stateTarget
 
@@ -73,5 +73,3 @@ const carousel = props => {
 	</div>
 	);
 }
-
-export default carousel;

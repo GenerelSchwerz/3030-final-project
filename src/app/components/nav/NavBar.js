@@ -1,4 +1,5 @@
 import './NavBar.css'
+import Link from "next/link";
 
 export default function NavBar(props) {
 	return (
@@ -11,14 +12,14 @@ export default function NavBar(props) {
 					switch (props.auth) {
 						case true: return (
 							<div className='nav-bar_buttonGroup'>
-								<button type="button" className='nav-bar_home'>Home</button>
-								<button type="button" className='nav-bar_support'>Support</button>
+								<button type="button" className='nav-bar_home'><Link href="/AddItem">Add Item</Link></button>
+								<button type="button" className='nav-bar_support'><Link href="/">Log Out</Link></button>
 							</div>
 						);
 						case false: return (
 							<div className='nav-bar_buttonGroup'>
-								<button type="button" className='nav-bar_login'>Login</button>
-								<button type="button" className='nav-bar_signup'>Sign Up</button>
+								<button type="button" className='nav-bar_login'><Link href="/auth">Login</Link></button>
+								<button type="button" className='nav-bar_signup'><Link href="/auth">Sign Up</Link></button>
 							</div>
 						);
 						default: return "Undefined";
