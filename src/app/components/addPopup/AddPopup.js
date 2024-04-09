@@ -9,6 +9,7 @@ export default function AddPopup() {
   const [description, setDescription] = useState("");
   const [model, setModel] = useState("");
   const [price, setPrice] = useState("");
+  const [src, setSrc] = useState("");
 
   // Function to handle form submission
   const handleSubmit = (event) => {
@@ -19,6 +20,7 @@ export default function AddPopup() {
       model: model,
       price: price,
       description: description,
+      src: src,
     };
 
     console.log(shoeInfo);
@@ -39,6 +41,7 @@ export default function AddPopup() {
         setDescription("");
         setModel("");
         setPrice("");
+        setSrc("");
       });
   };
 
@@ -60,6 +63,9 @@ export default function AddPopup() {
               </div>
               <div className="price">
                 <input type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+              </div>
+              <div className="src">
+                <input type="text" placeholder="Image URL" value={src} onChange={(e) => setSrc(e.target.value)} />
               </div>
             </div>
 
