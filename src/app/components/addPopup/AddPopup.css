@@ -1,0 +1,142 @@
+.modal-overlay {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #eedcc8;
+  padding: 20px;
+  border-radius: 25px;
+  width: 500px;
+  height: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+  border: 1px solid black;
+}
+
+.modal h1 {
+  background-color: #eedcc8;
+  font-size: 50px;
+  font-family: "Kantumruy", sans-serif;
+  text-align: center;
+}
+
+.add-picture {
+  background-color: white;
+  width: 215px;
+  height: 150px;
+  margin: 10px auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-picture img.icon {
+  width: 150px;
+  height: 149px;
+  display: flex;
+  margin: auto;
+  background-color: white;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  background-color: #eedcc8;
+}
+
+.body2 {
+  display: flex;
+  padding: 20px;
+  background-color: #eedcc8;
+}
+
+.nameOfShoe input,
+.model input,
+.price input {
+  background-color: white;
+  flex: 1;
+  border-radius: 15px;
+  padding-bottom: 15px;
+  padding-top: 5px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nameOfShoe input,
+.model input,
+.price input,
+.description textarea {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  color: #c7c3c3;
+  font-family: "Kantumruy", sans-serif;
+  border-radius: 15px;
+  border: none;
+  padding: 5px;
+}
+
+.description {
+  background-color: rgb(255, 255, 255);
+  flex: 1;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.description textarea {
+  background-color: transparent;
+  border-radius: 15px;
+  border: none;
+  resize: none;
+  width: 92%;
+  height: 78%;
+  padding: 10px;
+}
+
+.body3 {
+  background-color: #eedcc8;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.submit {
+  background-color: #cdb69c;
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 30px;
+  margin-top: 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  font-family: "Kantumruy", sans-serif;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit:hover {
+  background-color: #aa865d;
+}
+
+.form {
+  background-color: #eedcc8;
+}
+
+.nameOfShoe,
+.model,
+.price {
+  background-color:#eedcc8;
+}
