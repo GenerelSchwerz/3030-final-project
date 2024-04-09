@@ -9,55 +9,23 @@ function debug(...args) {
   }
 }
 
-const testDB = [
-  {
-    name: "SB Chron 2 Canvas",
-    src: "/sb-chron-2-canvas.png",
-    price: 65
-  },
-  {
-    name: "SB Chron 2 Skate",
-    src: "/chron-2-skate.png",
-    price: 75
-  },
-  {
-    name: "SB Force 58",
-    src: "/sb-force-58.png",
-    price: 80
-  },
-  {
-    name: "SB Vertebrae",
-    src: "/vertebrae.png",
-    price: 85
-  },
-  {
-    name: "SB Zoom Janoski",
-    src: "/zoom-janoski.png",
-    price: 95
-  },
-
-  {
-    name: "SB Pogo Skate",
-    src: "/sb-pogo-skate.png",
-    price: 90
-  }
-]
-
 const fetchData = async (uri, controller, opts = {}) => {
   try {
     const opts1 = {
-      credentials: DEBUG ? "same-origin" : "include",
+      credentials: DEBUG ? "include" : "include",
       ...opts,
-    }
+    };
 
     if (controller) {
       opts1.signal = controller.signal;
     }
 
-    console.log("fetching", `${API_BASE_URL}/${uri}`, opts1);
+    debug("fetching", `${API_BASE_URL}/${uri}`, opts1);
     const res = await fetch(`${API_BASE_URL}/${uri}`, opts1);
 
     if (!res.ok) {
+      console.error(res);
+      console.error(await res.text());
       throw new Error("Failed to fetch items");
     }
 
@@ -70,8 +38,7 @@ const fetchData = async (uri, controller, opts = {}) => {
     }
     throw error;
   }
-}
-
+};
 
 const clearMatchingLocalStorage = (subKey, exclude) => {
   const keys = Object.keys(localStorage);
@@ -80,13 +47,11 @@ const clearMatchingLocalStorage = (subKey, exclude) => {
       localStorage.removeItem(key);
     }
   }
-}
-
-
+};
 
 /**
  * Technically feature incomplete as prefetch lookup to check if db changed is necessary for reliably fresh data.
- * 
+ *
  * @param {string} key
  * @param {string} uri
  * @param {AbortController} controller
@@ -116,17 +81,15 @@ const fetchPersistentData = async (key, uri, controller, opts = {}) => {
     }
     throw error;
   }
-
 };
 
 /**
  *
- * @param {AbortController} controller 
- * @param {{limit?: number, after?: number}} opts 
- * @returns 
+ * @param {AbortController} controller
+ * @param {{limit?: number, after?: number}} opts
+ * @returns
  */
 export const fetchFeaturedListings = async (controller, opts = {}) => {
-
   let uri = "listings/featured";
   if (opts.limit != null && opts.after != null) {
     uri += `?limit=${opts.limit}&after=${opts.after}`;
@@ -136,7 +99,7 @@ export const fetchFeaturedListings = async (controller, opts = {}) => {
     uri += `?after=${opts.after}`;
   }
 
-  const key = `featuredListings:${uri}`
+  const key = `featuredListings:${uri}`;
   clearMatchingLocalStorage("featuredListings", key);
   return fetchPersistentData(key, uri, controller);
 };
@@ -181,21 +144,19 @@ export const fetchUserListings = async (userid, controller, opts = {}) => {
   return fetchPersistentData(`userListings:${userid}:${queryParams.toString()}`, uri, controller);
 };
 
-
 export const getUser = async (username, controller) => {
   // TODO: prefetch to check if user was updated, if so then fetch full user data
-  
+
   // then perform full lookup.
   return fetchData(`user/${username}`, controller);
-}
-
+};
 
 /**
- * 
- * @param {any} data 
- * @param {AbortController} controller 
- * @param {RequestInit} opts 
- * @returns 
+ *
+ * @param {any} data
+ * @param {AbortController} controller
+ * @param {RequestInit} opts
+ * @returns
  */
 export const createListing = async (data, controller, opts = {}) => {
   const response = await fetchData("listing", controller, {
@@ -204,8 +165,40 @@ export const createListing = async (data, controller, opts = {}) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-    ...opts
+    ...opts,
   });
 
   return response; // already in json
 };
+
+export const login = async (username, password, controller) => {
+  const response = await fetchData("login", controller, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  });
+
+  return response;
+};
+
+export const register = async (username, email, password, controller) => {
+  const response = await fetchData("register", controller, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, email, password }),
+  });
+
+  return response;
+}
+
+export const logout = async (controller) => {
+  return fetchData("logout", controller);
+};
+
+export const getInfo = async (controller) => {
+  return fetchData("/@me", controller);
+}
