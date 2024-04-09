@@ -73,6 +73,16 @@ const fetchData = async (uri, controller, opts = {}) => {
 }
 
 
+const clearMatchingLocalStorage = (subKey, exclude) => {
+  const keys = Object.keys(localStorage);
+  for (const key of keys) {
+    if (key.startsWith(subKey) && key !== exclude) {
+      localStorage.removeItem(key);
+    }
+  }
+}
+
+
 
 /**
  * Technically feature incomplete as prefetch lookup to check if db changed is necessary for reliably fresh data.
@@ -80,11 +90,10 @@ const fetchData = async (uri, controller, opts = {}) => {
  * @param {string} key
  * @param {string} uri
  * @param {AbortController} controller
- * @param {{arrayAppend?: boolean}} opts
- * @param {RequestInit} reqOpts
+ * @param {RequestInit} opts
  * @returns
  */
-const fetchPersistentData = async (key, uri, controller, opts = {}, reqOpts = {}) => {
+const fetchPersistentData = async (key, uri, controller, opts = {}) => {
   // check if local storage has the featured list from recently
   const storedFeaturedItems = localStorage.getItem(key);
   const storedFeaturedItemsParsed = storedFeaturedItems ? JSON.parse(storedFeaturedItems) : null;
@@ -95,15 +104,7 @@ const fetchPersistentData = async (key, uri, controller, opts = {}, reqOpts = {}
   }
 
   try {
-    const data = await fetchData(uri, controller, reqOpts);
-
-    if (opts.arrayAppend && storedFeaturedItemsParsed) {
-      // append the new data to the stored data
-      const newData = [...storedFeaturedItemsParsed.value, ...data];
-      localStorage.setItem(key, JSON.stringify({ value: newData, timestamp: new Date() }));
-      return newData;
-      
-    }
+    const data = await fetchData(uri, controller, opts);
 
     // store the featured list in local storage
     localStorage.setItem(key, JSON.stringify({ value: data, timestamp: new Date() }));
@@ -121,7 +122,7 @@ const fetchPersistentData = async (key, uri, controller, opts = {}, reqOpts = {}
 /**
  *
  * @param {AbortController} controller 
- * @param {{limit?: number, after?: number, append?: boolean}} opts 
+ * @param {{limit?: number, after?: number}} opts 
  * @returns 
  */
 export const fetchFeaturedListings = async (controller, opts = {}) => {
@@ -135,9 +136,9 @@ export const fetchFeaturedListings = async (controller, opts = {}) => {
     uri += `?after=${opts.after}`;
   }
 
-  const append = opts.append || false;
-
-  return fetchPersistentData("featuredListings", uri, controller, { arrayAppend: append });
+  const key = `featuredListings:${uri}`
+  clearMatchingLocalStorage("featuredListings", key);
+  return fetchPersistentData(key, uri, controller);
 };
 
 /**
