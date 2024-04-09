@@ -1,50 +1,32 @@
-'use client';
+"use client";
 
 import NavBar from "./components/nav/NavBar";
 import Carousel from "./components/carousel/Carousel";
 import ItemList from "./components/item-list/ItemList";
+import { useState, useEffect } from "react";
+import { fetchFeaturedListings } from "./components/utils";
 
 export default function Home() {
+  const [data, setData] = useState([]);
 
-	const data = [
-		{
-			name: "SB Chron 2 Canvas",
-			src: "/sb-chron-2-canvas.png",
-			price: 65
-		},
-		{
-			name: "SB Chron 2 Skate",
-			src: "/chron-2-skate.png",
-			price: 75
-		},
-		{
-			name: "SB Force 58",
-			src: "/sb-force-58.png",
-			price: 80
-		},
-		{
-			name: "SB Vertebrae",
-			src: "/vertebrae.png",
-			price: 85
-		},
-		{
-			name: "SB Zoom Janoski",
-			src: "/zoom-janoski.png",
-			price: 95
-		},
+  // TODO: implement scrolling feature.
+  const [idx, setIdx] = useState(0);
 
-		{
-			name: "SB Pogo Skate",
-			src: "/sb-pogo-skate.png",
-			price: 90
-		}
-	];
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetchFeaturedListings(controller, { after: idx, limit: 10 })
+      .then((data) => setData(data))
+      .catch((err) => console.error(err));
+
+    return () => controller.abort();
+  }, [idx, setData]);
 
   return (
-	<>
-		<NavBar auth={false}/>
-		<Carousel />
-		<ItemList items={data} auth={false}/>
-	</>
+    <>
+      <NavBar auth={false} />
+      <Carousel />
+      <ItemList items={data} auth={false} />
+    </>
   );
 }

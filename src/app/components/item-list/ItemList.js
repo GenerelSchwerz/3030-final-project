@@ -9,7 +9,7 @@ export default function ItemList(props) {
 				<h1>Women's</h1>
 			</div>
 			<div className="item-list_Images">
-				{props.items.map((element, idx) => (
+				{props.items?.map((element, idx) => (
 					<Item 
 						name = {element.name}
 						price={element.price} 

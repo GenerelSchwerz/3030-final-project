@@ -58,8 +58,8 @@ export default function Carousel(props) {
 				return (
 					<div key={idx} className="carousel_Item" style={{transform: `translate(-${carouselPosition}%)`}}>
 						<img src={element} key={idx}/>
-						<img src={element} key={idx}/>
-						<img src={element} key={idx}/>
+						<img src={element} key={idx + 100}/>
+						<img src={element} key={idx + 1000}/>
 					</div>
 				);
 			})
