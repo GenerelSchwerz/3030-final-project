@@ -4,7 +4,7 @@ export default function Item(props) {
 	return (
 		<div className='item'>
 			<h2 className="model">{props.name}</h2>
-			<img src={props.src}/>
+			<img src={props.src} alt="No image"/>
 			<div className='item_Text'>
 				<h3>Price: ${props.price}</h3>
 				{(() => {

@@ -12,7 +12,7 @@ export default function ItemList(props) {
 				{props.items?.map((element, idx) => (
 					<Item 
 						name = {element.name}
-						price={element.price} 
+						price={element.price.toFixed(2)} 
 						src={element.src} 
 						key={idx} 
 						auth={props.auth}/>

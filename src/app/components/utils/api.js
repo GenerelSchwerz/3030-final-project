@@ -80,10 +80,11 @@ const fetchData = async (uri, controller, opts = {}) => {
  * @param {string} key
  * @param {string} uri
  * @param {AbortController} controller
- * @param {RequestInit} opts
+ * @param {{arrayAppend?: boolean}} opts
+ * @param {RequestInit} reqOpts
  * @returns
  */
-const fetchPersistentData = async (key, uri, controller, opts = {}) => {
+const fetchPersistentData = async (key, uri, controller, opts = {}, reqOpts = {}) => {
   // check if local storage has the featured list from recently
   const storedFeaturedItems = localStorage.getItem(key);
   const storedFeaturedItemsParsed = storedFeaturedItems ? JSON.parse(storedFeaturedItems) : null;
@@ -94,7 +95,15 @@ const fetchPersistentData = async (key, uri, controller, opts = {}) => {
   }
 
   try {
-    const data = await fetchData(uri, controller, opts);
+    const data = await fetchData(uri, controller, reqOpts);
+
+    if (opts.arrayAppend && storedFeaturedItemsParsed) {
+      // append the new data to the stored data
+      const newData = [...storedFeaturedItemsParsed.value, ...data];
+      localStorage.setItem(key, JSON.stringify({ value: newData, timestamp: new Date() }));
+      return newData;
+      
+    }
 
     // store the featured list in local storage
     localStorage.setItem(key, JSON.stringify({ value: data, timestamp: new Date() }));
@@ -112,7 +121,7 @@ const fetchPersistentData = async (key, uri, controller, opts = {}) => {
 /**
  *
  * @param {AbortController} controller 
- * @param {{limit?: number, after?: number}} opts 
+ * @param {{limit?: number, after?: number, append?: boolean}} opts 
  * @returns 
  */
 export const fetchFeaturedListings = async (controller, opts = {}) => {
@@ -126,7 +135,9 @@ export const fetchFeaturedListings = async (controller, opts = {}) => {
     uri += `?after=${opts.after}`;
   }
 
-  return fetchPersistentData("featuredListings", uri, controller);
+  const append = opts.append || false;
+
+  return fetchPersistentData("featuredListings", uri, controller, { arrayAppend: append });
 };
 
 /**
