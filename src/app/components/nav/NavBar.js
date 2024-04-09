@@ -5,58 +5,67 @@ import { useState, useEffect } from "react";
 import { getInfo, logout } from "../utils";
 
 export default function NavBar(props) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(0);
 
   useEffect(() => {
-	const controller = new AbortController();
-	getInfo(controller).then((response) => {
-		setLoggedIn(true);
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      setLoggedIn(2);
+      return;
+    }
 
-	}).catch((err) => {
-		setLoggedIn(false)
-	});
+    const controller = new AbortController();
+    getInfo(controller)
+      .then((response) => {
+        setLoggedIn(1);
+      })
+      .catch((err) => {
+        setLoggedIn(2);
+      });
 
-	return () => controller.abort();
+    return () => controller.abort();
   }, []);
 
   const onLogout = () => {
-	const controller = new AbortController();
-	logout(controller).then(() => {
-	  setLoggedIn(false);
-	  window.location.href = "/";
-	}).catch((err) => {
-	  console.error(err);
-	});
+    const controller = new AbortController();
+    logout(controller)
+      .then(() => {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
-	return () => controller.abort();
-  }
+    return () => controller.abort();
+  };
 
   return (
     <nav className="nav-bar">
       <div className="nav-bar_topDiv">
-        <h1>cosmic commerse</h1>
+        <Link href="/" className="nav-bar-title">cosmic commerse</Link>
         <input type="text" placeholder="Search.." />
-        {
-          loggedIn ? (
-            <div className="nav-bar_buttonGroup">
-              <button type="button" className="nav-bar_home">
-                <Link href="/add-item">Add Item</Link>
-              </button>
-              <button type="button" className="nav-bar_support" onClick={onLogout}>
-                <p>Log Out</p>
-              </button>
-            </div>
-          ) : (
-            <div className="nav-bar_buttonGroup">
-              <button type="button" className="nav-bar_login">
-                <Link href="/login">Login</Link>
-              </button>
-              <button type="button" className="nav-bar_signup">
-                <Link href="/register">Sign Up</Link>
-              </button>
-            </div>
-          )
-        }
+        {loggedIn === 0 ? (
+          <></>
+        ) : loggedIn === 1 ? (
+          <div className="nav-bar_buttonGroup">
+            <button type="button" className="nav-bar_home">
+              <Link href="/add-item">Add Item</Link>
+            </button>
+            <button type="button" className="nav-bar_support" onClick={onLogout}>
+              <p>Log Out</p>
+            </button>
+          </div>
+        ) : (
+          <div className="nav-bar_buttonGroup">
+            <button type="button" className="nav-bar_login">
+              <Link href="/login">Login</Link>
+            </button>
+            <button type="button" className="nav-bar_signup">
+              <Link href="/register">Sign Up</Link>
+            </button>
+          </div>
+        )}
       </div>
       <div className="nav-bar_bottomDiv">
         <button type="button" className="nav-bar_womens">

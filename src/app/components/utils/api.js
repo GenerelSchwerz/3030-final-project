@@ -200,5 +200,5 @@ export const logout = async (controller) => {
 };
 
 export const getInfo = async (controller) => {
-  return fetchData("/@me", controller);
+  return fetchData("@me", controller);
 }

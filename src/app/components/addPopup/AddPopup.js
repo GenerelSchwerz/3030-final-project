@@ -18,7 +18,7 @@ export default function AddPopup() {
     const shoeInfo = {
       name: shoeName,
       model: model,
-      price: price,
+      price: parseFloat(price),
       description: description,
       src: src,
     };
