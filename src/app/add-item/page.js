@@ -2,7 +2,7 @@
 
 import NavBar from "../components/nav/NavBar";
 import AddPopup from "../components/addPopup/AddPopup";
-import Carousel from "../components/carousel/Carousel";
+import Modal from "../components/loginModal/LoginModal";
 
 export default function Home() {
 
@@ -41,10 +41,11 @@ export default function Home() {
 	];
 
 
+
   return (
 	<>
 		<NavBar auth={true}/>
-		<AddPopup/>
+		<Modal />
 	</>
   );
 }
