@@ -1,0 +1,111 @@
+.navigationBar {
+  background-color: #e9d9c1;
+  height: 13%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.websiteName {
+  background-color: #e9d9c1;
+  font-family: "Karla", sans-serif;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text-shadow here */
+}
+.hidden {
+  display: none;
+}
+.upperNav {
+  display: flex;
+  background-color: #e9d9c1;
+}
+
+.searchbarcontainer {
+  background-color: white;
+  display: flex;
+}
+
+.searchicon {
+  background-color: transparent;
+  height: 20px;
+  padding-top: 5px;
+}
+.searchBar,
+.searchbarcontainer {
+  background-color: white;
+  width: 61%;
+  border-radius: 15px;
+  border: none;
+  height: 33px;
+  padding-left: 10px;
+  outline: none;
+}
+
+.searchBar {
+  flex-grow: 1;
+  padding-right: 10px;
+}
+
+.logincreateAccountButtons {
+  background-color: #e9d9c1;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.login,
+.createAccount {
+  background-color: white;
+  border-radius: 15px;
+  font-family: "Karla", sans-serif;
+  height: 33px;
+  width: 100px;
+  border: none;
+  font-size: large;
+}
+
+.login,
+.createAccount,
+.searchbarcontainer,
+.websiteName {
+  margin: 10px;
+}
+
+.searchbarcontainer,
+.login,
+.createAccount {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lowernav {
+  display: flex;
+  background-color: #e9d9c1;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.womens,
+.mens,
+.childrens,
+.color,
+.price {
+  font-size: 25px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  background-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding-right: 3%;
+}
+
+.womens::after,
+.mens::after,
+.childrens::after,
+.color::after,
+.price::after {
+  content: "";
+  display: block;
+  border-bottom: 3px solid black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
