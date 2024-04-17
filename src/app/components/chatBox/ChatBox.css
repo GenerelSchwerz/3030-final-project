@@ -1,0 +1,77 @@
+.chatbox * {
+	text-align: center;
+}
+
+.chatbox_container {
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	top: 0px;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(3px);
+}
+
+.chatbox {
+	height: 50%;
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	border: 1px solid black;
+	margin: auto;
+	border-radius: 10%;
+}
+
+.chatbox_textContainer {
+	height: 75%;
+	width: 100%;
+	background-color: white;
+	border: 1px solid pink;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow-y: scroll;
+}
+
+.chatbox_textElementIn, 
+.chatbox_textElementOut {
+	max-width: 50%;
+}
+
+.chatbox_textElementIn {
+	align-self: flex-start;
+}
+
+.chatbox_textElementOut {
+	align-self: flex-end;
+}
+
+.chatbox_textElementIn *,
+.chatbox_textElementOut * {
+	padding: 10px;
+	word-break: break-all;
+}
+
+.chatbox_textElementIn * {
+	background-color: gray;
+}
+
+.chatbox_textElementOut * {
+	background-color: blue;
+}
+
+.chatbox_buttonContainer {
+	width: 90%;
+	margin: 10px 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.chatbox_searchBar {
+	width: 80%;
+	text-align: left;
+}

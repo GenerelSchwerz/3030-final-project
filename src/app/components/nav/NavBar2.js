@@ -19,7 +19,11 @@ export default function NavBar({ showButtons }) {
             <button className="createAccount">Sign up</button>
           </div>
         ) : (
-          <div className="hidden"> </div>
+          <div className="logincreateAccountButtons">
+            <button className="chat">Chat</button>
+            <button className="home">Home</button>
+            <button className="account">Account</button>
+          </div>
         )}
       </div>
       <div className="lowernav">
