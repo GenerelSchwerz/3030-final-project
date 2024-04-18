@@ -21,16 +21,21 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	border: 1px solid black;
 	margin: auto;
 	border-radius: 10%;
+}
+
+.chatbox_heading {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	width: 90%;
 }
 
 .chatbox_textContainer {
 	height: 75%;
 	width: 100%;
 	background-color: white;
-	border: 1px solid pink;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -39,7 +44,9 @@
 
 .chatbox_textElementIn, 
 .chatbox_textElementOut {
-	max-width: 50%;
+	max-width: 45%;
+	border-radius: 5%;
+	margin: 10px;
 }
 
 .chatbox_textElementIn {
@@ -61,7 +68,7 @@
 }
 
 .chatbox_textElementOut * {
-	background-color: blue;
+	background-color: rgb(0, 10, 170, 0.7);
 }
 
 .chatbox_buttonContainer {
