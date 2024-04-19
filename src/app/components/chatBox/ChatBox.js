@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function ChatBox() {
 
-	const [data, updateDatat = useState([
+	const [data, updateData] = useState([
 		{
 			text:"textttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
 			inbound: true
@@ -29,14 +29,15 @@ export default function ChatBox() {
 	}
 
 	const onSubmitSend = event => {
-		console.log(data.length);
-		let x = data.push(
-			{
-				text: input,
-				inbound: false
-			}
-		);
-		console.log(data);
+		if(input.length == 0) {
+			return;
+		}
+		data.push({
+			text: input,
+			inbound: false
+		});
+
+		updateData(data);
 		updateInput("");
 	}
 

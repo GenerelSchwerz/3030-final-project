@@ -40,35 +40,36 @@
 	flex-direction: column;
 	justify-content: space-between;
 	overflow-y: scroll;
+	scrollbar-width: none;
 }
 
-.chatbox_textElementIn, 
+.chatbox_textContainer::-webkit-scrollbar {
+	display: none;
+}
+
+.chatbox_textElementIn,
 .chatbox_textElementOut {
 	max-width: 45%;
-	border-radius: 5%;
+	border-radius: 15px;
 	margin: 10px;
+	border: solid 1px black;
 }
 
 .chatbox_textElementIn {
 	align-self: flex-start;
+	background-color: gray;
 }
 
 .chatbox_textElementOut {
 	align-self: flex-end;
+	background-color: aqua;
 }
 
 .chatbox_textElementIn *,
 .chatbox_textElementOut * {
-	padding: 10px;
+	margin: 10px;
 	word-break: break-all;
-}
-
-.chatbox_textElementIn * {
-	background-color: gray;
-}
-
-.chatbox_textElementOut * {
-	background-color: rgb(0, 10, 170, 0.7);
+	background-color: rgb(0, 0, 0, 0);
 }
 
 .chatbox_buttonContainer {
