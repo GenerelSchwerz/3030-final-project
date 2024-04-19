@@ -45,8 +45,9 @@ export default function ChatBox() {
 		<div className="chatbox_container">
 			<div className="chatbox">
 				<div className="chatbox_heading">
+					<input className="chatbox_exitButton" type="button" value={"<"}/>
 					<h3>trashford</h3>
-					<input className="chatbox_exitButton" type="button" value={"x"}/>
+					<input className="chatbox_exitButton" type="button" value={"X"}/>
 				</div>
 				<div className="chatbox_textContainer">
 					{
