@@ -1,6 +1,9 @@
 .convolist * {
 	text-align: center;
 	background-color: white;
+	font-family: "karla", sans-serif;
+	font-weight: 500;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* add text-shadow here */
 }
 
 .convolist_container {
@@ -50,6 +53,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
 	overflow-y: scroll;
 	scrollbar-width: none;
 	border-bottom-left-radius: 20px;
@@ -57,10 +61,21 @@
 }
 
 .convolist_convoItem {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	margin-top: 3px;
+	border-bottom: solid 1px black;
+}
+
+.convolist_convoItem * {
+	text-align: left;
+}
+
+.convolist_itemTop {
 	display: flex;
 	justify-content: space-between;
-	margin: 10px;
-	border-bottom: solid 1px black;
 }
 
 .convolist_convosContainer::-webkit-scrollbar {
