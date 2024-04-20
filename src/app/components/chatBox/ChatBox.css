@@ -4,7 +4,7 @@
 }
 
 .chatbox_container {
-	z-index: 1;
+	z-index: 2;
 	height: 100%;
 	width: 100%;
 	top: 0px;
@@ -98,7 +98,12 @@
 	margin: 10px;
 }
 
+.chatbox_sendButton {
+	border-radius: 15px;
+}
+
 .chatbox_searchBar {
 	width: 80%;
 	text-align: left;
+	border-radius: 20px;
 }
