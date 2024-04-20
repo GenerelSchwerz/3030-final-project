@@ -5,15 +5,15 @@ import { ArrowBigLeft, ArrowBigRight, Circle, CircleDot } from "lucide-react";
 
 export default function Carousel2() {
   const images = [
-    "./slider_lilacDunks.png",
-    "./slider_grayDunks.png",
-    "./slider_beigeDunks.png",
-    "./shoe1.png",
-    "./shoe2.png",
-    "./shoe3.png",
-    "./shoe4.png",
-    "./shoe5.png",
-    "./shoe6.png",
+    "/slider_lilacDunks.png",
+    "/slider_grayDunks.png",
+    "/slider_beigeDunks.png",
+    "/shoe1.png",
+    "/shoe2.png",
+    "/shoe3.png",
+    "/shoe4.png",
+    "/shoe5.png",
+    "/shoe6.png",
   ];
 
   const [imageindex, setimageindex] = useState(-3);

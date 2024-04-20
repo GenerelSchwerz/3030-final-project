@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./Homepagebttmcomponent.css";
 
 export default function Homepagebttmcomponent() {
@@ -6,7 +7,9 @@ export default function Homepagebttmcomponent() {
       <div className="halfcircle">
         <h1>Soft Serenity</h1>
         <p>Feel serene with neutral essentials </p>
-        <button> Shop Now</button>
+        <Link href={"./marketplace"}>
+          <button> Shop Now</button>
+        </Link>
       </div>
       <div className="leftsidecircles">
         <div className="circle1">

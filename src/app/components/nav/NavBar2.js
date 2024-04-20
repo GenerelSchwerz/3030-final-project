@@ -8,7 +8,7 @@ export default function NavBar({ showButtons }) {
         <div className="searchbarcontainer">
           <img
             className="searchicon"
-            src="./magnifyingglass.svg"
+            src="/magnifyingglass.svg"
             alt="search"
           />
           <input className="searchBar" type="text" placeholder="Search..." />
