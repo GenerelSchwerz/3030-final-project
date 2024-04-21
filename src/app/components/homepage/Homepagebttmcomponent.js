@@ -7,7 +7,7 @@ export default function Homepagebttmcomponent() {
       <div className="halfcircle">
         <h1>Soft Serenity</h1>
         <p>Feel serene with neutral essentials </p>
-        <Link href={"./marketplace"}>
+        <Link href={"/marketplace"}>
           <button> Shop Now</button>
         </Link>
       </div>
