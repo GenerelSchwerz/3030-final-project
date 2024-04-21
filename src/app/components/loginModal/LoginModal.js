@@ -20,15 +20,15 @@ export default function LoginModal() {
                     <div className="modalContainer">
                         <div className="leftModal">
                             <img src="/shoesNStuff.png"/>
-                            <p>X</p>
+                            <h2 onClick={openModal}>X</h2>
                         </div>
-                        <h2>Login</h2>
-                        <form>
-                            <input type="text" value="Username"/> <br/>
-                            <input type="text" value="Password"/> <br/>
-                            <button>Submit</button>
+                        <h1>Login</h1>
+                        <form action="">
+                            <input type="text" placeHolder="Username.."/> <br/>
+                            <input type="text" placeHolder="Password.."/> <br/>
+                            <button className="submitButton">Submit</button>
                         </form>
-                        <p> Create An Account</p>
+                        <p> Create An Account?</p>
                     </div>
                 </div>
             </div>
