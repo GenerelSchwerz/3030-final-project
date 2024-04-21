@@ -1,19 +1,12 @@
 * {
-	padding: 0;
-	margin: 0;
-	background-color: #FCEDD7;
+  padding: 0;
+  margin: 0;
+  background-color: #fcedd7;
 }
 
-:root {
-	--main-color: #FCEDD7;
-	--color-main-accent: white;
-	--color-main-accent2: rgb(158, 158, 158);
-
-	--color-hover: gray;
-	--color-hover2: red;
-
+html,
+body {
+  height: 100%;
 }
 
-html, body {
-	height: 100%;
-}
+
