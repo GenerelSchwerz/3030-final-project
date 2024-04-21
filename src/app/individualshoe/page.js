@@ -2,92 +2,37 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+
+import * as api from "../utils"
+
 export default function Individualshoepage({searchParams}) {
 
-  const [shoeId, setShoeId] = useState(null);
+
+  const [shoeData, setShoeData] = useState(null);
 
   useEffect(() => {
-    console.log(searchParams)
-    setShoeId(searchParams.shoeId);
+    const id = searchParams.shoeId;
+
+    const controller = new AbortController();
+    api.getListing(id, controller).then((data) => {
+      console.log("hi", data)
+      setShoeData(data);
+    });
+
+    return () => controller.abort();
   }, [searchParams]);
 
-  const [shoes, setShoes] = useState([
-    {
-      id: 1,
-      name: "Nike Dunk Low",
-      img: "/nikedunklow.png",
-      price: 79.97,
-      favorite: false,
-    },
-    {
-      id: 2,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 3,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 4,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 5,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 6,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 7,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 8,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 9,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 10,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-  ]);
-
   return (
+
+    shoeData == null ? <div>Loading...</div> :
+
+
     <div>
-      <h1>Shoe ID: {shoeId}</h1>
-      {/* Render shoe details based on shoeid */}
+      <h1>Shoe ID: {shoeData.id}</h1>
+      <h1>Shoe Name: {shoeData.name}</h1>
+      <h1>Shoe Price: {shoeData.price}</h1>
+      <h1>Shoe Description: {shoeData.description}</h1>
+      <h1>Shoe Model: {shoeData.model}</h1>
     </div>
   );
 }

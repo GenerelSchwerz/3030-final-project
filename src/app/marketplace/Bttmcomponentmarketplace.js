@@ -6,79 +6,93 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 
+import * as api from "../utils";
+
 export default function BttmComponentMarketplace() {
-  const [shoes, setShoes] = useState([
-    {
-      id: 1,
-      name: "Nike Dunk Low",
-      img: "/nikedunklow.png",
-      price: 79.97,
-      favorite: false,
-    },
-    {
-      id: 2,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 3,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 4,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 5,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 6,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 7,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 8,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 9,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-    {
-      id: 10,
-      name: "Nike Dunk Low Retro SE",
-      img: "/nikedunklowretro.png",
-      price: 120,
-      favorite: false,
-    },
-  ]);
+  const [shoes, setShoes] = useState([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    api.fetchFeaturedListings(controller).then((data) => {
+      console.log(data)
+      setShoes(data);
+    });
+
+    return () => controller.abort();
+  }, []);
+
+  // const [shoes, setShoes] = useState([
+  //   {
+  //     id: 1,
+  //     name: "Nike Dunk Low",
+  //     img: "/nikedunklow.png",
+  //     price: 79.97,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  //   {
+  //     id: 10,
+  //     name: "Nike Dunk Low Retro SE",
+  //     img: "/nikedunklowretro.png",
+  //     price: 120,
+  //     favorite: false,
+  //   },
+  // ]);
 
   const handleHeartClick = (e, shoeId) => {
     e.stopPropagation(); // Stop event propagation
@@ -99,7 +113,7 @@ export default function BttmComponentMarketplace() {
       </div>
 
       <div className="shoe-grid">
-        {shoes.map((shoe) => (
+        {shoes?.map((shoe) => (
           <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
             <div className="shoe-card">
               <button className={shoe.favorite ? "favbutton active" : "favbutton"} onClick={(e) => handleHeartClick(e, shoe.id)}>
