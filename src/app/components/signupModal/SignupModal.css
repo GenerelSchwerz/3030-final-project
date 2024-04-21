@@ -1,0 +1,71 @@
+.signupbutton {
+    display: block;
+    margin: 100px auto 0;
+    padding: 10px 40px;
+    border-radius: 10px;
+    background-color: #FF69B4;
+}
+
+.overlay {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    max-height: 175px;
+}
+
+.modalContainer {
+    max-width: 400px;
+    max-height: 420px;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+    border-color: black;
+    border-radius: 8px;
+    border: solid 1px;
+    padding: 0px 25px 25px 25px;
+}
+
+.topModal {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 100px;
+}
+
+.formContainer {
+    display: flex;
+    margin: 10px;
+    height: 500px;
+}
+.formContainer input[type="text"] {
+    margin: 5px;
+    width: 230px;
+}
+.formStuff {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.formStuff input[type="text"] {
+    width: 100px;
+}
+
+.formSubmit {
+    width: 75px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #CDB69C;
+    margin-top: 5px;
+}
