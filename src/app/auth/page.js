@@ -1,7 +1,7 @@
 'use client';
 
-import NavBar from "../components/nav/NavBar";
-import Carousel from "../components/carousel/Carousel";
+import NavBar2 from "../components/nav/NavBar2";
+import Carousel2 from "../components/carousel/Carousel2";
 import ItemList from "../components/item-list/ItemList"
 
 export default function Home() {
@@ -42,8 +42,8 @@ export default function Home() {
 
   return (
 	<>
-		<NavBar auth={true}/>
-		<Carousel />
+		<NavBar2 auth={true}/>
+		<Carousel2 />
 		<ItemList items={data} auth={true}/>
 	</>
   );

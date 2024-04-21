@@ -9,8 +9,7 @@ import ConvoList from "./components/convoList/ConvoList";
 export default function Home() {
   return (
     <>
-      <NavBar2 classname="navbar" showButtons={false} />
-      <ConvoList />
+      <NavBar2 classname="navbar" showButtons={true} />
       <Carousel2 classname="carousel" />
       <Homepagebttmcomponent />
     </>
