@@ -2,16 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-export default function Individualshoepage() {
-  const router = useRouter();
+export default function Individualshoepage({searchParams}) {
+
   const [shoeId, setShoeId] = useState(null);
 
   useEffect(() => {
-    const { query } = router;
-    if (query && query.shoeid) {
-      setShoeId(query.shoeid);
-    }
-  }, [router]);
+    console.log(searchParams)
+    setShoeId(searchParams.shoeId);
+  }, [searchParams]);
 
   const [shoes, setShoes] = useState([
     {
