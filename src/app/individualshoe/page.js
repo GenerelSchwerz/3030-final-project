@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-
 import * as api from "../utils"
 
 export default function Individualshoepage({searchParams}) {
@@ -15,7 +13,6 @@ export default function Individualshoepage({searchParams}) {
 
     const controller = new AbortController();
     api.getListing(id, controller).then((data) => {
-      console.log("hi", data)
       setShoeData(data);
     });
 
