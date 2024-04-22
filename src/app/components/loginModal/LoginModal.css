@@ -16,7 +16,7 @@
     height: 100%;
 }
 
-img {
+.loginModal img {
     max-width: 175px;
 }
 
@@ -46,14 +46,14 @@ img {
     gap: 100px;
 }
 
-form {
+.loginModal form {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 15px;
 }
 
-input[type=text] {
+.loginModal input[type=text] {
     border-radius: 10px;
     padding: 5px;
     background-color: white;
