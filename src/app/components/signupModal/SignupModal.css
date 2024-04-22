@@ -1,4 +1,4 @@
-.signupbutton {
+.signupModalOverlay .signupbutton {
     display: block;
     margin: 100px auto 0;
     padding: 10px 40px;
@@ -6,23 +6,27 @@
     background-color: #FF69B4;
 }
 
-.overlay {
+.signupModalOverlay {
     display: flex;
     position: fixed;
     width: 100%;
     height: 100%;
+	top: 0px;
+	z-index: 2;
+	background-color: rgb(0, 0, 0, 0.5);
+	backdrop-filter: blur(3px);
 }
 
-.signupModal img {
+.signupModalOverlay img {
     max-height: 175px;
 }
 
-.modalContainer {
+.signupModalOverlay .modalContainer {
     max-width: 400px;
     max-height: 420px;
     width: 100%;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -35,7 +39,7 @@
     padding: 0px 25px 25px 25px;
 }
 
-.topModal {
+.signupModalOverlay .topModal {
     width: 400px;
     display: flex;
     flex-direction: row;
@@ -43,26 +47,26 @@
     gap: 100px;
 }
 
-.formContainer {
+.signupModalOverlay .formContainer {
     display: flex;
     margin: 10px;
     height: 500px;
 }
-.formContainer input[type="text"] {
+.signupModalOverlay .formContainer input[type="text"] {
     margin: 5px;
     width: 230px;
 }
-.formStuff {
+.signupModalOverlay .formStuff {
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.formStuff input[type="text"] {
+.signupModalOverlay .formStuff input[type="text"] {
     width: 100px;
 }
 
-.formSubmit {
+.signupModalOverlay .formSubmit {
     width: 75px;
     border-radius: 10px;
     padding: 5px;

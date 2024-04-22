@@ -47,7 +47,7 @@ export default function BttmComponentMarketplace() {
               <button className={shoe.favorite ? "favbutton active" : "favbutton"} onClick={(e) => handleHeartClick(e, shoe.id)}>
                 {shoe.favorite === true ? <Heart className="heart-icon" style={{ fill: "black" }} /> : <Heart className="heart-icon" />}
               </button>
-              <img src={shoe.src} alt={shoe.name} />
+              <img src={shoe.sideview} alt={shoe.name} />
               <h2>{shoe.name}</h2>
               <div className="priceandplus">
                 <p>${shoe.price}</p>
