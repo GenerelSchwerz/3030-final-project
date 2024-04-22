@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import * as api from "../utils"
+import * as api from "../utils";
+import NavBar from "../components/nav/NavBar2";
+import Carousel2 from "../components/carousel/Carousel2";
 
-export default function Individualshoepage({searchParams}) {
-
-
+export default function Individualshoepage({ searchParams }) {
   const [shoeData, setShoeData] = useState(null);
 
   useEffect(() => {
@@ -20,12 +20,12 @@ export default function Individualshoepage({searchParams}) {
     return () => controller.abort();
   }, [searchParams]);
 
-  return (
-
-    shoeData == null ? <div>Loading...</div> :
-
-
+  return shoeData == null ? (
+    <div>Loading...</div>
+  ) : (
     <div>
+      <NavBar />
+      <Carousel2 />
       <h1>Shoe ID: {shoeData.id}</h1>
       <h1>Shoe Name: {shoeData.name}</h1>
       <h1>Shoe Price: {shoeData.price}</h1>
