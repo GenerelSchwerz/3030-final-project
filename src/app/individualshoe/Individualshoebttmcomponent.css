@@ -1,0 +1,68 @@
+.individualshoecontainer {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.individualshoecontainer hr {
+  border: 0.5px solid black;
+  width: 100%;
+}
+
+.grayarea {
+  background-color: #eeeff5;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Added position relative */
+}
+
+.grayarea h1 {
+  background-color: #eeeff5;
+  text-align: center;
+  font-size: 100px;
+  padding-top: 1%;
+}
+
+.grayarea img {
+  background-color: #eeeff5;
+  position: absolute;
+  left: 0;
+}
+
+.bottomarea {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.bottomleftarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 55%;
+  background-color: black;
+  justify-content: center;
+}
+
+.bottomrightarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 45%;
+  background-color: rgb(86, 57, 57);
+}
+
+.center {
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Inner shadow effect */
+}
