@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-import { getInfo } from './components/utils';
+import { getInfo } from './utils';
 
 const AuthContext = createContext(); // Creates a Context object.
 
@@ -22,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       setLoggedIn(2);
     }
-  
+
     const controller = new AbortController();
     getInfo(controller)
       .then((response) => {
