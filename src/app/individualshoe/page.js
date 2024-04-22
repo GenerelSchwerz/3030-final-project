@@ -37,7 +37,8 @@ export default function Individualshoepage({ searchParams }) {
               <div className="bottomleftarea">
                 <div className="center">
                   {" "}
-                  <div className="centerimagecontainer">
+                    <div className="centerimagecontainer">
+                      <img src="{shoeData.sideview}"/>
                   </div>
                 </div>
               </div>
