@@ -26,7 +26,6 @@ export default function NavBar() {
 
 	const onSignupSubmitHandler = event => {
 		updateShowSignup(false);
-		updateShowLogin(true);
 	}
 
 	const onCreateAccountHandler = event => {
