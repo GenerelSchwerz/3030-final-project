@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Added position relative */
+  position: relative;
 }
 
 .grayarea h1 {
@@ -27,6 +27,7 @@
   text-align: center;
   font-size: 100px;
   padding-top: 1%;
+  position: relative;
 }
 
 .grayarea img {
@@ -47,43 +48,225 @@
   align-items: center;
   height: 100%;
   width: 55%;
-  background-color: black;
+  background-color: #eeeff5;
   justify-content: center;
+  position: relative;
+  overflow: visible;
 }
 
 .bottomrightarea {
   display: flex;
-  flex-direction: column;
+
   align-items: center;
   height: 100%;
   width: 45%;
-  background-color: rgb(86, 57, 57);
+  background-color: #eeeff5;
+  position: relative;
 }
 
 .center {
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   background-color: white;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Inner shadow effect */
   display: flex;
   flex-direction: column;
-
+  position: relative;
+  margin-bottom: 10%;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
 }
 
 .center img {
-  background-color: black;
- position: relative;
+  background-color: transparent;
+  margin-top: 16%;
 }
 
-.name{
+.name {
   width: 50%;
   height: 35%;
-  background-color: red;
-  margin-left: auto;
+  background-color: transparent;
+  left: auto;
+  right: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3%;
+  padding-right: 2%;
 }
 
-.name h1{
-  font-size: 700%;
-  overflow:visible;
+.name h1 {
+  font-size: 290%;
+  overflow: visible;
+  background-color: transparent;
+  color: black;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Drop shadow */
+  opacity: 0.2;
+}
+
+.bottom {
+  background-color: white;
+  width: 85%;
+  height: 20%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+  margin-bottom: 5%;
+}
+
+.bottom h1 {
+  font-size: 400%;
+  margin: auto;
+  background-color: transparent;
+  color: black;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Drop shadow */
+  opacity: 0.2;
+}
+
+.bottom img {
+  position: relative;
+  background-color: transparent;
+}
+
+.topleft {
+  width: 43%;
+  height: 37%;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 4.5%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5),
+    /* Top shadow */ 0px 5px 10px rgba(0, 0, 0, 0.5); /* Bottom shadow */
+}
+
+.topleft img {
+  position: relative;
+  margin: auto;
+  background-color: transparent;
+}
+
+.backarrow:hover {
+  animation: squish 200ms ease-in-out;
+  scale: 1.1;
+}
+
+.backarrow {
+  color: transparent;
+  margin: 1.5% 1.75%;
+}
+@keyframes squish {
+  50% {
+    scale: 1.4 0.6;
+  }
+}
+
+.bottomrightarea h1 {
+  font-weight: 500;
+  font-size: 500%;
+  background-color: transparent;
+}
+
+.addtocart,
+.favorite,
+.contactseller {
+  all: unset;
+  width: 85%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  margin-top: 5%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+}
+
+.addtocart,
+.contactseller {
+  background-color: #636363;
+}
+
+.favorite {
+  border: 1px solid black;
+  background-color: white;
+}
+
+.addtocart p,
+.favorite p,
+.contactseller p {
+  background-color: transparent;
+  font-weight: 500;
+}
+.addtocart p,
+.contactseller p {
   color: white;
+}
+
+.left {
+  width: 50%;
+  height: 100%;
+  background-color: #eeeff5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.left h1 {
+  background-color: transparent;
+  font-weight: 300;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Drop shadow */
+}
+
+.right {
+  width: 50%;
+  height: 100%;
+  background-color: #eeeff5;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+.heart {
+  all: unset;
+  margin-left: 2%;
+}
+
+.description {
+  width: 85%;
+  height: 30%;
+  background-color: transparent;
+  margin-top: 13%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.description p {
+  background-color: transparent;
+}
+
+.contactseller {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 14%;
+}
+
+.size {
+  margin-top: 5%;
+  width: 50%;
+  height: 15%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5), 0px -5px 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
 }

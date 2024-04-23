@@ -6,7 +6,8 @@ import NavBar from "../components/nav/NavBar2";
 import Carousel2 from "../components/carousel/Carousel2";
 import { AuthProvider } from "../context";
 import ".//Individualshoebttmcomponent.css";
-
+import Link from "next/link";
+import { Heart } from "lucide-react";
 export default function Individualshoepage({ searchParams }) {
   const [shoeData, setShoeData] = useState(null);
 
@@ -31,7 +32,9 @@ export default function Individualshoepage({ searchParams }) {
         <div className="individualshoecontainer">
           <hr />
           <div className="grayarea">
-            <img src="/backarrow.svg" />
+            <Link href="/marketplace">
+              <img className="backarrow" src="/backarrow.svg" />
+            </Link>
             <h1> {shoeData.name}</h1>
             <div className="bottomarea">
               <div className="bottomleftarea">
@@ -41,8 +44,48 @@ export default function Individualshoepage({ searchParams }) {
                   </div>
                   <img src={shoeData.sideview} height={"65%"} alt="image" />
                 </div>
+                <div className="topleft">
+                  {" "}
+                  <img src={shoeData.topview} height={"95%"} alt="image" />
+                </div>
+
+                <div className="bottom">
+                  {" "}
+                  <h1> Skate</h1>{" "}
+                  <img src={shoeData.frontview} height={"100%"} alt="image" />{" "}
+                  <h1> Shoes</h1>
+                </div>
               </div>
-              <div className="bottomrightarea">hi</div>{" "}
+              <div className="bottomrightarea">
+                <div className="left">
+                  <h1> Size:</h1>
+
+                  <div className="size">
+                    {" "}
+                    <h1> {shoeData.size}</h1>
+                  </div>
+                </div>
+                <div className="right">
+                  {" "}
+                  <h1> ${shoeData.price}</h1>
+                  <button className="addtocart">
+                    {" "}
+                    <p> Add To Cart</p>
+                  </button>
+                  <button className="favorite">
+                    {" "}
+                    <p> Favorites</p>
+                    <Heart className="heart" />
+                  </button>
+                  <div className="description">
+                    <p>{shoeData.description}</p>{" "}
+                  </div>
+                  <button className="contactseller">
+                    {" "}
+                    <p> Contact Seller</p>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -51,7 +94,7 @@ export default function Individualshoepage({ searchParams }) {
         <h1>Shoe Price: {shoeData.price}</h1>
         <h1>Shoe Description: {shoeData.description}</h1>
         <h1>Shoe Model: {shoeData.model}</h1>
-        <img src={shoeData.sideview} alt="image"></img>
+        <img src={shoeData.frontview} alt="image"></img>
       </AuthProvider>
     </>
   );
