@@ -83,6 +83,8 @@ export default function NavBar() {
           </div>
         ) : (
           <div className="loggedInButtons">
+		    <button>Home</button>
+			<button>Messages picture</button>
 			<button onClick={onSignOutHandler}>Sign out</button>
 		  </div>
         )}
@@ -93,6 +95,7 @@ export default function NavBar() {
         <h2 className="childrens">Children's</h2>
         <h2 className="color">Color</h2>
         <h2 className="price">Price</h2>
+		<button>cart picture</button>
       </div>
     </nav>
 	<LoginModal show={showLogin} submitButtonHandler={onLoginSubmitHandler} exitButtonHandler={onExitHandler} createAccountHandler={onCreateAccountHandler}/>
