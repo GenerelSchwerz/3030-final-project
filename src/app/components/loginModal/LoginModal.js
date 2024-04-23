@@ -1,17 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginModal.css';
+import * as api from "../../utils"
+import { useAuth } from '@/app/context';
+
 export default function LoginModal(props) {
 
-    // // Use state for open and close modal status
-    // const[modal, setModal] = useState(false);
+	const[username, setUsername] = useState("");
+	const[password, setPassword] = useState("");
+	const[sendRequest, setSendRequest] = useState("false");
+	const context = useAuth();
 
-    // // Login Button onClick Handler
-    // const openModal = () => {
-    //     setModal(!modal);
-    // };
+	const onChangeUsername = event => {
+		setUsername(event.target.value);
+	}
+
+	const onChangePassword = event => {
+		setPassword(event.target.value);
+	}
+
+	const onSubmitForm = event => {
+		event.preventDefault();
+		console.log(event.target);
+		setSendRequest(true);
+	}
+
+	useEffect(() => {
+		if(!sendRequest) {
+			return;
+		}
+
+		const controller = new AbortController();
+		api.login(username, password, controller).then((data) => {
+      		console.log(data);
+			props.submitButtonHandler();
+			setSendRequest(false);
+			context.setLoggedIn(true);
+    	}).catch(err => {
+			console.log(err);
+			setSendRequest(false);
+		});
+
+		return () => {
+			controller.abort();
+	};
+	}, [sendRequest, username, password]);
 
     if (props.show) {
-		console.log(props);
         return (
                 <div className="loginModalOverlay">
                     <div className="loginModal">
@@ -20,10 +54,10 @@ export default function LoginModal(props) {
                             <h2 onClick={props.exitButtonHandler}>X</h2>
                         </div>
                         <h1>Login</h1>
-                        <form>
-                            <input type="text" placeholder="Username.."/> <br/>
-                            <input type="text" placeholder="Password.."/> <br/>
-                            <button className="submitButton" onClick={props.submitButtonHandler}>Submit</button>
+                        <form onSubmit={onSubmitForm}>
+                            <input type="text" placeholder="Username.." value={username} onChange={onChangeUsername}/> <br/>
+                            <input type="text" placeholder="Password.." value={password} onChange={onChangePassword}/> <br/>
+                            <button type="submit" className="submitButton">Submit</button>
                         </form>
                         <p onClick={props.createAccountHandler}>Create An Account?</p>
                     </div>

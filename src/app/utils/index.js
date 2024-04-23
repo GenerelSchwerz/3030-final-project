@@ -1,4 +1,5 @@
-const DATA_EXPIRY_DURATION = 1000 * 60 * 60 * 24; // 24 hours
+//const DATA_EXPIRY_DURATION = 1000 * 60 * 60 * 24; // 24 hours
+const DATA_EXPIRY_DURATION = 1;
 const DEBUG = true;
 
 export const API_BASE_URL = DEBUG ? "http://localhost:3003/api/v1" : "http://localhost:3003/api/v1";
@@ -176,13 +177,13 @@ export const getListing = async (listingId, controller) => {
   return fetchPersistentData(key, `listing/${listingId}`, controller);
 };
 
-export const login = async (username, password, controller) => {
+export const login = async (email, password, controller) => {
   const response = await fetchData("login", controller, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, password }),
   });
 
   return response;

@@ -2,13 +2,15 @@ import LoginModal from "../loginModal/LoginModal";
 import SignupModal from "../signupModal/SignupModal";
 import "./NavBar2.css";
 import { useAuth } from "@/app/context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import * as api from "../../utils"
 
 export default function NavBar() {
 
 	const authContext = useAuth();
 	const [showLogin, updateShowLogin] = useState(false);
-	const [showSignup, updateShowSignup] = useState(false)
+	const [showSignup, updateShowSignup] = useState(false);
+	const [sendLogout, updateSendLogout] = useState(false);
 
 	const onClickLogin = event => {
 		updateShowLogin(!showLogin)
@@ -19,18 +21,10 @@ export default function NavBar() {
 	}
 
 	const onLoginSubmitHandler = event => {
-		event.preventDefault();
-
-		//process stuff
-
 		updateShowLogin(false);
 	}
 
 	const onSignupSubmitHandler = event => {
-		event.preventDefault();
-
-		//process stuff
-
 		updateShowSignup(false);
 		updateShowLogin(true);
 	}
@@ -45,6 +39,31 @@ export default function NavBar() {
 		updateShowSignup(false);
 	}
 
+	const onSignOutHandler = event => {
+		updateSendLogout(true);
+	}
+
+	useEffect(() => {
+		if(!sendLogout) {
+			return;
+		}
+
+		const controller = new AbortController();
+		api.logout(controller).then(data => {
+			console.log(data);
+			updateSendLogout(false);
+			authContext.setLoggedIn(false);
+		}).catch(err => {
+			console.log(err);
+			updateSendLogout(false);
+			console.log(authContext);
+		});
+
+		return () => {
+			controller.abort();
+	};
+	}, [sendLogout]);
+
   return (
 	<>
     <nav className="navigationBar">
@@ -58,13 +77,15 @@ export default function NavBar() {
           />
           <input className="searchBar" type="text" placeholder="Search..." />
         </div>
-        {authContext.loggedIn ? (
+        {authContext.loggedIn != 1 ? (
           <div className="logincreateAccountButtons">
             <button className="login" onClick={onClickLogin}> Login </button>
             <button className="createAccount" onClick={onClickSignup}>Sign up</button>
           </div>
         ) : (
-          <div className="hidden"> </div>
+          <div className="loggedInButtons">
+			<button onClick={onSignOutHandler}>Sign out</button>
+		  </div>
         )}
       </div>
       <div className="lowernav">
