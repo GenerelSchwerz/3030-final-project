@@ -1,3 +1,4 @@
+
 import "./NavBar2.css";
 import LoginModal from "../loginModal/LoginModal";
 import SignupModal from "../signupModal/SignupModal";
@@ -68,7 +69,7 @@ export default function NavBar() {
 	<>
     <nav className="navigationBar">
       <div className="upperNav">
-        <h1 className="websiteName"> Cosmic Commerce </h1>
+        <Link href="/"><h1 className="websiteName"> Cosmic Commerce </h1></Link>
         <div className="searchbarcontainer">
           <img
             className="searchicon"
@@ -84,7 +85,7 @@ export default function NavBar() {
           </div>
         ) : (
           <div className="loggedInButtons">
-		    <Link href="/"><button>Home</button></Link>
+			<button>user picture</button>
 			<button>Messages picture</button>
 			<button onClick={onSignOutHandler}>Sign out</button>
 		  </div>
