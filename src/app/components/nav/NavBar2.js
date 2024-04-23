@@ -1,8 +1,9 @@
+import "./NavBar2.css";
 import LoginModal from "../loginModal/LoginModal";
 import SignupModal from "../signupModal/SignupModal";
-import "./NavBar2.css";
 import { useAuth } from "@/app/context";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import * as api from "../../utils"
 
 export default function NavBar() {
@@ -83,7 +84,7 @@ export default function NavBar() {
           </div>
         ) : (
           <div className="loggedInButtons">
-		    <button>Home</button>
+		    <Link href="/"><button>Home</button></Link>
 			<button>Messages picture</button>
 			<button onClick={onSignOutHandler}>Sign out</button>
 		  </div>
