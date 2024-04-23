@@ -36,10 +36,10 @@ export default function Individualshoepage({ searchParams }) {
             <div className="bottomarea">
               <div className="bottomleftarea">
                 <div className="center">
-                  {" "}
-                    <div className="centerimagecontainer">
-                      <img src="{shoeData.sideview}"/>
+                  <div className="name">
+                    <h1>{shoeData.name}</h1>{" "}
                   </div>
+                  <img src={shoeData.sideview} height={"65%"} alt="image" />
                 </div>
               </div>
               <div className="bottomrightarea">hi</div>{" "}
@@ -51,7 +51,7 @@ export default function Individualshoepage({ searchParams }) {
         <h1>Shoe Price: {shoeData.price}</h1>
         <h1>Shoe Description: {shoeData.description}</h1>
         <h1>Shoe Model: {shoeData.model}</h1>
-        <img src={shoeData.topview} width={300} height={"auto"} alt="image"></img>
+        <img src={shoeData.sideview} alt="image"></img>
       </AuthProvider>
     </>
   );

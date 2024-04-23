@@ -65,4 +65,25 @@
   height: 80%;
   background-color: white;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Inner shadow effect */
+  display: flex;
+  flex-direction: column;
+
+}
+
+.center img {
+  background-color: black;
+ position: relative;
+}
+
+.name{
+  width: 50%;
+  height: 35%;
+  background-color: red;
+  margin-left: auto;
+}
+
+.name h1{
+  font-size: 700%;
+  overflow:visible;
+  color: white;
 }
