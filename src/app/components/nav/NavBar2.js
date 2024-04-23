@@ -85,7 +85,7 @@ export default function NavBar() {
           </div>
         ) : (
           <div className="loggedInButtons">
-			<button>user picture</button>
+			<Link href="/user"><button>user picture</button></Link>
 			<button>Messages picture</button>
 			<button onClick={onSignOutHandler}>Sign out</button>
 		  </div>

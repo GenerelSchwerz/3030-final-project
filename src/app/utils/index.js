@@ -160,7 +160,8 @@ export const getUser = async (username, controller) => {
  * @returns
  */
 export const createListing = async (data, controller, opts = {}) => {
-  const response = await fetchData("listing", controller, {
+	console.log(JSON.stringify(data));
+	const response = await fetchData("listing", controller, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -168,7 +169,6 @@ export const createListing = async (data, controller, opts = {}) => {
     body: JSON.stringify(data),
     ...opts,
   });
-
   return response; // already in json
 };
 
