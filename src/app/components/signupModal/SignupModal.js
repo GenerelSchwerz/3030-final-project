@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignupModal.css';
+import * as api from "../../utils"
 
 export default function SignupModal(props) {
     if (props.show) {
@@ -13,10 +14,6 @@ export default function SignupModal(props) {
                     <h1>Create Account</h1>
                     <div className="formContainer">
                         <form action="">
-                            <div className="formStuff">
-                                <input type="text" placeholder="First Name"/>
-                                <input type="text" placeholder="Last Name"/>
-                            </div>
                             <input type="text" placeholder="Username"/>
                             <input type="text" placeholder="Password"/>
                             <div className="formStuff">
@@ -30,8 +27,6 @@ export default function SignupModal(props) {
             </div>
         );
     } else {
-        return (
-            <></>
-        );
+        return (<></>);
     }
 };
