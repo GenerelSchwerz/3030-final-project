@@ -6,7 +6,6 @@ import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import * as api from "../../utils"
-import AddPopup from "../addPopup/AddPopup";
 
 export default function NavBar() {
 
@@ -95,16 +94,24 @@ export default function NavBar() {
         ) : (
           <div className="loggedInButtons">
 
-      <Link href="/user" className="link">
+      		<Link href="/user" className="link">
 			<button className="icon">
 				<img src="/userIcon.png"/>
 			</button>
-      </Link>
+      		</Link>
+
+
+    	<Link href="/cart" className="link">
+			<button className="cart">
+				<img src="/cartIcon.png"/>
+			</button>
+    	</Link>
 			<button className="icon">
 				<img src="/messagingIcon.webp"/>
 			</button>
 
 			<button onClick={onSignOutHandler}>Sign Out</button>
+
 		  </div>
         )}
       </div>
@@ -114,12 +121,6 @@ export default function NavBar() {
         <h2 className="childrens">Children's</h2>
         <h2 className="color">Color</h2>
         <h2 className="price">Price</h2>
-
-    <Link href="/cart" className="link">
-		<button className="cart">
-			<img src="/cartIcon.png"/>
-		</button>
-    </Link>
       </div>
     </nav>
 	<LoginModal show={showLogin} submitButtonHandler={onLoginSubmitHandler} exitButtonHandler={onExitHandler} createAccountHandler={onCreateAccountHandler}/>
