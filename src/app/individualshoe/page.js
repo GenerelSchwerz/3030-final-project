@@ -1,11 +1,10 @@
 "use client"
-
 import { useState, useEffect } from "react";
 import * as api from "../utils";
 import NavBar from "../components/nav/NavBar2";
 import Carousel2 from "../components/carousel/Carousel2";
 import { AuthProvider } from "../context";
-import ".//Individualshoebttmcomponent.css";
+import "./Individualshoebttmcomponent.css";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 
@@ -52,16 +51,16 @@ export default function Individualshoepage({ searchParams }) {
                     />
                   )}
                 </div>
-                {shoeData.topview && (
-                  <div className="topleft">
+                <div className="topleft">
+                  {shoeData.topview && (
                     <img
                       src={shoeData.topview}
                       height={"95%"}
                       alt="Top View"
                       onError={(e) => (e.target.style.display = "none")}
                     />
-                  </div>
-                )}
+                  )}
+                </div>
                 <div className="bottom">
                   <h1> Skate</h1>
                   {shoeData.frontview && (
