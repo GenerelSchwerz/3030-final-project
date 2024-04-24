@@ -2,10 +2,11 @@
 import "./NavBar2.css";
 import LoginModal from "../loginModal/LoginModal";
 import SignupModal from "../signupModal/SignupModal";
-import { useAuth } from "@/app/context";
+import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import * as api from "../../utils"
+import AddPopup from "../addPopup/AddPopup";
 
 export default function NavBar() {
 
@@ -44,6 +45,14 @@ export default function NavBar() {
 		updateSendLogout(true);
 	}
 
+	const onSearchHandler = event => {
+		if(event.key !== "Enter") return
+		console.log(event.target.value);
+		api.searchListings(event.target.value).then(data => {
+			console.log(data);
+		}).catch(console.error);
+	}
+
 	useEffect(() => {
 		if(!sendLogout) {
 			return;
@@ -63,7 +72,7 @@ export default function NavBar() {
 		return () => {
 			controller.abort();
 	};
-	}, [sendLogout]);
+	}, [sendLogout, authContext]);
 
   return (
 	<>
@@ -76,18 +85,21 @@ export default function NavBar() {
             src="/magnifyingglass.svg"
             alt="search"
           />
-          <input className="searchBar" type="text" placeholder="Search..." />
+          <input className="searchBar" type="text" placeholder="Search..." onKeyDown={onSearchHandler}/>
         </div>
-        {authContext.loggedIn != 1 ? (
+        {authContext.loggedIn === false ? (
           <div className="logincreateAccountButtons">
             <button className="login" onClick={onClickLogin}> Login </button>
             <button className="createAccount" onClick={onClickSignup}>Sign up</button>
           </div>
         ) : (
           <div className="loggedInButtons">
+
+      <Link href="/user">
 			<button className="icon">
 				<img src="/userIcon.png"/>
 			</button>
+      </Link>
 			<button className="icon">
 				<img src="/messagingIcon.webp"/>
 			</button>
@@ -102,9 +114,12 @@ export default function NavBar() {
         <h2 className="childrens">Children's</h2>
         <h2 className="color">Color</h2>
         <h2 className="price">Price</h2>
+
+    <Link href="/cart">
 		<button className="cart">
 			<img src="/cartIcon.png"/>
 		</button>
+    </Link>
       </div>
     </nav>
 	<LoginModal show={showLogin} submitButtonHandler={onLoginSubmitHandler} exitButtonHandler={onExitHandler} createAccountHandler={onCreateAccountHandler}/>
