@@ -1,0 +1,89 @@
+
+.checkoutContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EEEFF5;
+    max-width: 85%;
+    margin: 0 auto;
+    border: solid 1px;
+}
+.topCheck {
+    margin-top: 50px;
+    display: flex;
+    justify-content: flex-start;
+    width: 85%;
+    background-color: #EEEFF5;
+}
+
+.topCheck img {
+    width: 50px;
+    background-color: #EEEFF5;
+}
+.topCheck a {
+    background-color: #EEEFF5;
+}
+.topCheck h1 {
+    font-size: 60px;
+    margin-left: 33%;
+    background-color: #EEEFF5;
+}
+.formCheck {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    background-color: #EEEFF5;
+}
+.formCheck form {
+    background-color: #EEEFF5;
+}
+.nameCheckout {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #EEEFF5;
+    margin: 10px;
+}
+  
+.nameCheckout input {
+    all: unset;
+    width: 250px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    border-radius: 25px;
+}
+  
+input[type="email"] {
+    all: unset;
+    margin: 20px 0px 30px 10px;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    border-radius: 25px;
+}
+
+.orderSummary {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    text-align: center;
+    width: 60%;
+    height: 90%;
+    background-color: white;
+}
+.orderSummary p, h2 {
+    background-color: white;
+}
+.confirmCheckout {
+    all: unset;
+    margin-top: 30px;
+    background-color: black;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    border-radius: 25px;
+}
