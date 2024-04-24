@@ -243,12 +243,12 @@
 .description {
   width: 85%;
   height: 30%;
-  background-color: transparent;
+  background-color: #eeeff5;
   margin-top: 13%;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-
+  box-shadow: none;
   justify-content: center;
 }
 
