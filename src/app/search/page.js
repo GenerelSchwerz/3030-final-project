@@ -1,52 +1,38 @@
-import "./Bttmcomponentmarketplace.css";
-import { useState, useEffect } from "react";
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
 import { Heart } from "lucide-react";
 import Link from "next/link";
-
-import { useAuth } from "../context";
+import NavBar from "../components/nav/NavBar2";
+import "./page.css"
 
 import * as api from "../utils";
 
-export default function BttmComponentMarketplace() {
-  const {updateUser} = useAuth();
-
-  const [shoes, setShoes] = useState([]);
-  const [cart, setCart] = useState([]);
+export default function SearchPage({ searchParams }) {
+  const [shoes, setShoeData] = useState(null);
 
   useEffect(() => {
+    const query = searchParams.q;
+
     const controller = new AbortController();
-    api
-      .fetchFeaturedListings(controller)
-      .then((data) => {
-        console.log(data);
-        setShoes(data);
-      })
-      .catch(console.error);
+    api.searchListings(query, controller).then((data) => {
+      if (data == null) {
+        return;
+      }
+      setShoeData(data.listings);
+    });
 
     return () => controller.abort();
-  }, []);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    api
-      .getInfo(controller)
-      .then((data) => {
-        setCart(data.cart);
-      })
-      .catch(console.error);
-
-    return () => controller.abort();
-  }, []);
+  }, [searchParams]);
 
   const handleHeartClick = (e, shoeId) => {
-    e.stopPropagation(); // Stop event propagation
+    e.stopPropagation();
     console.log("Added to favorites:", shoeId);
     setShoes((prevShoes) => prevShoes.map((shoe) => (shoe.id === shoeId ? { ...shoe, favorite: !shoe.favorite } : shoe)));
   };
 
   const handleCartClick = (e, shoeId) => {
-    e.stopPropagation(); // Stop event propagation
+    e.stopPropagation();
     console.log("Cart:", cart);
     if (cart.some((id) => id === shoeId)) {
       console.log("Item already in cart:", shoeId, "removing");
@@ -66,19 +52,20 @@ export default function BttmComponentMarketplace() {
           setCart((prevCart) => [...prevCart, shoeId]);
         })
         .catch(console.error);
-    }
+	  }
   };
 
   return (
-    <div className="bttmComponent">
-      <hr />
-      <div className="category">
-        <h1> Women's</h1>
-      </div>
-
+    <>
+      <NavBar />
+	  <div className="bttmComponent">
+      {shoes == null ? (
+        <div>Loading...</div>
+      ) : (
+		<>
+		<h1 className="category">{searchParams.q}</h1>
       <div className="shoe-grid">
         {shoes?.map((shoe) => (
-          // <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
           <div className="shoe-card" key={shoe.id}>
             <button className={shoe.favorite ? "favbutton active" : "favbutton"} onClick={(e) => handleHeartClick(e, shoe.id)}>
               {shoe.favorite === true ? <Heart className="heart-icon" style={{ fill: "black" }} /> : <Heart className="heart-icon" />}
@@ -91,8 +78,8 @@ export default function BttmComponentMarketplace() {
                 onError={(e) => {
                   const emptyDiv = document.createElement("div");
                   emptyDiv.className = "empty-image";
-                  e.target.replaceWith(emptyDiv); // Replace with empty div with class name "empty-image"
-                }} // Replace image with empty div if it fails to load
+                  e.target.replaceWith(emptyDiv);
+                }}
               />
             ) : (
               <div className="empty-image"></div>
@@ -106,9 +93,11 @@ export default function BttmComponentMarketplace() {
               </button>
             </div>
           </div>
-          // </Link>
         ))}
       </div>
-    </div>
+	  </>
+    )}
+	</div>
+	</>
   );
 }

@@ -7,7 +7,7 @@ export default function LoginModal(props) {
 
 	const[username, setUsername] = useState("");
 	const[password, setPassword] = useState("");
-	const[sendRequest, setSendRequest] = useState("false");
+	const[sendRequest, setSendRequest] = useState(false);
 	const context = useAuth();
 
 	const onChangeUsername = event => {
@@ -34,7 +34,8 @@ export default function LoginModal(props) {
       		console.log(data);
 			props.submitButtonHandler();
 			setSendRequest(false);
-			context.setLoggedIn(true);
+			console.log(data)
+			context.setLoggedIn(true, data.token);
     	}).catch(err => {
 			console.log(err);
 			setSendRequest(false);
@@ -43,7 +44,7 @@ export default function LoginModal(props) {
 		return () => {
 			controller.abort();
 	};
-	}, [sendRequest, username, password]);
+	}, [sendRequest, username, password, context, props]);
 
     if (props.show) {
         return (

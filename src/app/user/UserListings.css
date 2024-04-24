@@ -103,17 +103,24 @@
   }
 }
 
-
-
-.cartbutton {
+.deletebutton {
   all: unset;
+  background-color: white;
+  width: 30%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  padding-right: 2%;
+  padding-top: 1%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add drop shadow */
 }
 
-.cartbutton:hover {
+.deletebutton:hover {
   animation: squish 200ms ease-in-out;
 }
 
-.shoecardbuttonlink{
+.shoecardbuttonlink {
   border: none;
   background-color: transparent;
   width: 90%;

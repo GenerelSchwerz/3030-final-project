@@ -40,11 +40,10 @@ export default function SignupModal(props) {
 		}
 
 		const controller = new AbortController();
-		api.register(username, email, password, controller).then((data) => {
-      		console.log(data);
+		api.register({username, email, password, phone}, controller).then((data) => {
 			props.submitButtonHandler();
 			setSendRequest(false);
-			context.setLoggedIn(true);
+			context.setLoggedIn(true, data.token);
     	}).catch(err => {
 			console.log(err);
 			setSendRequest(false);
@@ -53,7 +52,7 @@ export default function SignupModal(props) {
 		return () => {
 			controller.abort();
 	};
-	}, [sendRequest, username, email, password]);
+	}, [sendRequest, username, email, password, phone, context, props]);
 
     if (props.show) {
         return (
