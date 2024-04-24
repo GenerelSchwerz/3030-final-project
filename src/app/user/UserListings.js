@@ -47,7 +47,12 @@ export default function UserListings() {
     }
 
     return () => {
-      if (user != null && shoes != null && deleteRequest == null && controller != null) {
+      if (
+        user != null &&
+        shoes != null &&
+        deleteRequest == null &&
+        controller != null
+      ) {
         controller.abort();
       }
     };
@@ -60,26 +65,44 @@ export default function UserListings() {
   };
 
   return (
-    <div className="userListings">
+    <div className="bttmComponent">
       <hr />
       <div className="category">
-        <h1>Your Items</h1>
+        <h1> Your Items</h1>
       </div>
 
       <div className="shoe-grid">
         {shoes?.map((shoe) => (
-          <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
-            <div className="shoe-card">
-              <img src={shoe.sideview} alt={shoe.name} />
-              <h2>{shoe.name}</h2>
-              <div className="priceanddelete">
-                <p>${shoe.price}</p>
-                <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
-                  Delete
-                </button>
-              </div>
+          // <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
+          <div className="shoe-card" key={shoe.id}>
+            <Link
+              href={`/individualshoe?shoeId=${shoe.id}`}
+              className="shoecardbuttonlink"
+            >
+              {shoe.sideview ? (
+                <img
+                  src={shoe.sideview}
+                  alt={shoe.name}
+                  onError={(e) => {
+                    const emptyDiv = document.createElement("div");
+                    emptyDiv.className = "empty-image";
+                    e.target.replaceWith(emptyDiv); // Replace with empty div with class name "empty-image"
+                  }} // Replace image with empty div if it fails to load
+                />
+              ) : (
+                <div className="empty-image"></div>
+              )}
+            </Link>
+            <h2>{shoe.name}</h2>
+            <div className="priceandplus">
+              <p>${shoe.price}</p>
+              <button
+                className="deletebutton"
+                onClick={(e) => handleDelete(e, shoe.id)}
+              >Delete</button>
             </div>
-          </Link>
+          </div>
+          // </Link>
         ))}
       </div>
     </div>
