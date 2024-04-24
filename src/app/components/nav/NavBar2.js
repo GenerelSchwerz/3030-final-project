@@ -44,6 +44,14 @@ export default function NavBar() {
 		updateSendLogout(true);
 	}
 
+	const onSearchHandler = event => {
+		if(event.key !== "Enter") return
+		console.log(event.target.value);
+		api.searchListings(event.target.value).then(data => {
+			console.log(data);
+		}).catch(console.error);
+	}
+
 	useEffect(() => {
 		if(!sendLogout) {
 			return;
@@ -76,7 +84,7 @@ export default function NavBar() {
             src="/magnifyingglass.svg"
             alt="search"
           />
-          <input className="searchBar" type="text" placeholder="Search..." />
+          <input className="searchBar" type="text" placeholder="Search..." onKeyDown={onSearchHandler}/>
         </div>
         {authContext.loggedIn != 1 ? (
           <div className="logincreateAccountButtons">

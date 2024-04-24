@@ -148,6 +148,8 @@ export const searchListings = async (query, controller, opts = {}) => {
     uri += `&${queryParams.toString()}`;
   }
 
+  console.log('uri:', uri)
+
   return fetchSessionData(`searchListings:${queryParams.toString()}`,uri, controller);
 };
 
