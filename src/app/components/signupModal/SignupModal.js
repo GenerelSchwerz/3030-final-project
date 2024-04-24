@@ -41,7 +41,7 @@ export default function SignupModal(props) {
 
 		const controller = new AbortController();
 		api.register({username, email, password, phone}, controller).then((data) => {
-      		console.log(data);
+      		console.log(data, "hi");
 			props.submitButtonHandler();
 			setSendRequest(false);
 			context.setLoggedIn(true, data.token);
