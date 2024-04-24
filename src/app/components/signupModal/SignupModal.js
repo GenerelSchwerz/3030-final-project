@@ -40,7 +40,7 @@ export default function SignupModal(props) {
 		}
 
 		const controller = new AbortController();
-		api.register(username, email, password, controller).then((data) => {
+		api.register({username, email, password, phone}, controller).then((data) => {
       		console.log(data);
 			props.submitButtonHandler();
 			setSendRequest(false);
@@ -53,7 +53,7 @@ export default function SignupModal(props) {
 		return () => {
 			controller.abort();
 	};
-	}, [sendRequest, username, email, password]);
+	}, [sendRequest, username, email, password, phone, context, props]);
 
     if (props.show) {
         return (

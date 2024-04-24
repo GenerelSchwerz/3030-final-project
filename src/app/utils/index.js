@@ -193,14 +193,15 @@ export const login = async (email, password, controller) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ username: email, email, password }),
   });
 
   return response;
 };
 
-export const register = async (username, email, password, controller) => {
-  const response = await fetchData("register", controller, {
+export const register = async (opts, controller) => {
+  const { username, email, password, phone } = opts;
+    const response = await fetchData("register", controller, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -43,7 +43,7 @@ export default function LoginModal(props) {
 		return () => {
 			controller.abort();
 	};
-	}, [sendRequest, username, password]);
+	}, [sendRequest, username, password, context, props]);
 
     if (props.show) {
         return (
