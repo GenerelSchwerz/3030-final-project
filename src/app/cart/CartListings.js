@@ -8,7 +8,7 @@ import * as api from "../utils";
 
 export default function UserListings() {
   const { user } = useAuth();
-  const [shoes, setShoes] = useState(null);
+  const [shoes, setShoes] = useState([]);
 
   const cb = useCallback(
     async (controller) => {
@@ -50,6 +50,8 @@ export default function UserListings() {
   };
 
   return (
+	<>
+	{shoes.length > 0 ? (
     <div className="userListings">
       <hr />
       <div className="category">
@@ -72,6 +74,7 @@ export default function UserListings() {
           </div>
         ))}
       </div>
-    </div>
+    </div>) : (<></>)}
+	</>
   );
 }
