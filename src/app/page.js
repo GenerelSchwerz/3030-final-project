@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
 	<AuthProvider>
-	  <NavBar2 classname="navbar" showButtons={true} />
+	  <NavBar2 />
       <Carousel2 />
       <Homepagebttmcomponent />
 	</AuthProvider>

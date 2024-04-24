@@ -172,6 +172,16 @@ export const createListing = async (data, controller, opts = {}) => {
   return response; // already in json
 };
 
+export const deleteListing = async(listingId, controller) => {
+	const response = await fetchData(`listing/${listingId}`, controller, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+	return response;
+}
+
 export const getListing = async (listingId, controller) => {
     const key = `listing:${listingId}`;
   return fetchPersistentData(key, `listing/${listingId}`, controller);

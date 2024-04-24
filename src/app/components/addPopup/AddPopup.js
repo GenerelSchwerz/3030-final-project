@@ -14,6 +14,7 @@ export default function AddPopup() {
   const [sideview, setSideView] = useState("");
   const [frontview, setFrontView] = useState("");
   const [showModal, setShowModal] = useState("");
+  const [title, setTitle] = useState("New Listing");
   const [sendRequest, setSendRequest] = useState(false);
 
   // Function to handle form submission
@@ -46,8 +47,10 @@ export default function AddPopup() {
 		api.createListing(info, controller).then((data) => {
       		console.log(data);
 			setSendRequest(false);
+			setShowModal(false);
     	}).catch(err => {
 			console.log(err);
+			setTitle("Error");
 			setSendRequest(false);
 		});
 
@@ -66,7 +69,7 @@ export default function AddPopup() {
 	    <div className="addItemModalOverlay">
 	      <div className="addItemModal">
 			<button className="addItemModalExit" onClick={onAddItemClick}>x</button>
-		    <h1>New Sale</h1>
+		    <h1>{title}</h1>
 	        <form className="addItemForm" onSubmit={handleSubmit}>
 				<div className="fieldGroup">
 	              <div className="generalField">

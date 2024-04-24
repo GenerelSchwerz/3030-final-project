@@ -7,21 +7,55 @@ import Link from "next/link";
 import * as api from "../utils";
 
 export default function UserListings() {
-  const [shoes, setShoes] = useState([]);
+  const [shoes, setShoes] = useState(null);
+  const [user, setUser] = useState(null);
+  const [deleteRequest, setDeleteRequest] = useState(null);
 
   useEffect(() => {
-    const controller = new AbortController();
-    api.fetchFeaturedListings(controller).then((data) => {
-      console.log(data)
-      setShoes(data);
-    });
 
-    return () => controller.abort();
-  }, []);
+	if(shoes != null && user != null && deleteRequest == null) {
+		return;
+	}
+
+    const controller = new AbortController();
+
+	if(user == null) {
+		api.getInfo(controller).then(user => {
+			setUser(user);
+		});
+	}
+
+	if(user != null && shoes == null) {
+		api.fetchUserListings(user.id, controller).then(data => {
+			console.log(data);
+			setShoes(data);
+		}).catch(err => {
+			console.log(err);
+		});
+	}
+
+	if(user != null && deleteRequest != null) {
+		console.log("sending delete");
+		api.deleteListing(deleteRequest, controller).then(data => {
+			console.log(data);
+			setDeleteRequest(null);
+		}).catch(err => {
+			console.log(err);
+			setDeleteRequest(null);
+		});
+	}
+
+    return () => {
+		if(user != null && shoes != null && deleteRequest == null && controller != null) {
+			controller.abort();
+		}
+	}
+  }, [user, deleteRequest, shoes]);
 
   const handleDelete = (e, shoeId) => {
-    e.stopPropagation(); // Stop event propagation
-    console.log("deleting", shoeId);
+    e.preventDefault();
+	setDeleteRequest(shoeId);
+	console.log(deleteRequest);
   };
 
   return (
