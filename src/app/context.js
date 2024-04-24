@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { getInfo } from "./utils";
 
 /**
- * @type {React.Context<{ user: any; loggedIn: boolean; setLoggedIn: (value: boolean, token?: string) => void; }>}
+ * @type {React.Context<{ user: any; loggedIn: boolean; setLoggedIn: (value: boolean, token?: string) => any | null; updateUser: (controller: AbortController) => void; }>}
  */
 const AuthContext = createContext(); // Creates a Context object.
 
@@ -22,6 +22,23 @@ export const AuthProvider = ({ children }) => {
 
     setLoggedIn(value);
   };
+
+  const updateUser = async (controller) => {
+    try {
+      const response = await getInfo(controller);
+      setLoggedIn(true);
+      localStorage.setItem("token", response.token);
+      setUser(response);
+
+      return response
+    
+    } catch (err) {
+      setLoggedIn(false);
+      localStorage.removeItem("token");
+      setUser(null);
+      return null;
+    }
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -47,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     return () => controller.abort();
   }, [setLoggedIn]);
 
-  return <AuthContext.Provider value={{ user, loggedIn, setLoggedIn: setSetLoggedIn }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, loggedIn, setLoggedIn: setSetLoggedIn, updateUser }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext); // Custom hook to use the auth context

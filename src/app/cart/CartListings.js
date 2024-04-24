@@ -1,47 +1,52 @@
 "use client";
 
 import "./CartListings.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useAuth } from "../context";
 import * as api from "../utils";
 
 export default function UserListings() {
-
   const { user } = useAuth();
   const [shoes, setShoes] = useState(null);
 
-  console.log(shoes);
+  const cb = useCallback(
+    async (controller) => {
+      const user1 = user;
+      // .then((user1) => {
+      if (user1 == null) return;
+      if (user1.cart == null) return;
+
+      let shoesArr = [];
+
+      await Promise.all(
+        user1.cart.map(async (id) => {
+          const data = await api.getListing(id, controller);
+          if (data == null) return;
+          shoesArr.push(data);
+        })
+      );
+
+      shoesArr.sort((a, b) => a.id - b.id);
+
+      setShoes(shoesArr);
+    },
+    [user]
+  );
 
   useEffect(() => {
-	if(!user)
-		return;
-
-	const controller = new AbortController();
-	let shoesArr = [];
-
-	user.cart.forEach(id => {
-		api
-		.getListing(id, controller)
-		.then((data) => {
-			shoesArr.push(data);
-		})
-			.catch((err) => {
-			console.log(err);
-		});
-	});
-
-	setShoes(shoesArr);
-
-    return () =>controller.abort();
-  }, [user, shoes]);
+    const controller = new AbortController();
+    cb(controller);
+    return () => controller.abort();
+  }, [cb]);
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
-	api.removeListingFromCart(shoeId)
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
-	setShoes([]);
+    api
+      .removeListingFromCart(shoeId)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+    setShoes(shoes.filter((shoe) => shoe.id !== shoeId));
   };
 
   return (
@@ -52,19 +57,19 @@ export default function UserListings() {
       </div>
 
       <div className="shoe-grid">
-        {shoes?.map(shoe => (
-          <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
-            <div className="shoe-card">
+        {shoes?.map((shoe) => (
+          <div className="shoe-card" key={shoe.id}>
+            <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
               <img src={shoe.sideview} alt={shoe.name} />
-              <h2>{shoe.name}</h2>
-              <div className="priceanddelete">
-                <p>${shoe.price}</p>
-                <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
-                  Delete
-                </button>
-              </div>
+            </Link>
+            <h2>{shoe.name}</h2>
+            <div className="priceanddelete">
+              <p>${shoe.price}</p>
+              <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
+                Delete
+              </button>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
