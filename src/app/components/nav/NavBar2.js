@@ -102,9 +102,11 @@ export default function NavBar() {
         <h2 className="childrens">Children's</h2>
         <h2 className="color">Color</h2>
         <h2 className="price">Price</h2>
-		<button className="cart">
-			<img src="/cartIcon.png"/>
-		</button>
+		<Link href="/checkout">
+			<button className="cart">
+				<img src="/cartIcon.png"/>
+			</button>
+		</Link>
       </div>
     </nav>
 	<LoginModal show={showLogin} submitButtonHandler={onLoginSubmitHandler} exitButtonHandler={onExitHandler} createAccountHandler={onCreateAccountHandler}/>
