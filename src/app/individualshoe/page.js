@@ -27,7 +27,6 @@ export default function Individualshoepage({ searchParams }) {
   ) : (
     <>
       <NavBar />
-      <Carousel2 />
       <div className="individualshoecontainer">
         <hr />
         <div className="grayarea">
@@ -85,12 +84,12 @@ export default function Individualshoepage({ searchParams }) {
           </div>
         </div>
       </div>
-      <h1>Shoe ID: {shoeData.id}</h1>
+      {/* <h1>Shoe ID: {shoeData.id}</h1>
       <h1>Shoe Name: {shoeData.name}</h1>
       <h1>Shoe Price: {shoeData.price}</h1>
       <h1>Shoe Description: {shoeData.description}</h1>
       <h1>Shoe Model: {shoeData.model}</h1>
-      {shoeData.frontview && <img src={shoeData.frontview} alt="Front View" onError={(e) => (e.target.style.display = "none")} />}
+      {shoeData.frontview && <img src={shoeData.frontview} alt="Front View" onError={(e) => (e.target.style.display = "none")} />} */}
     </>
   );
 }

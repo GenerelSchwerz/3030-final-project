@@ -4,9 +4,13 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 
+import { useAuth } from "../context";
+
 import * as api from "../utils";
 
 export default function BttmComponentMarketplace() {
+  const {updateUser} = useAuth();
+
   const [shoes, setShoes] = useState([]);
   const [cart, setCart] = useState([]);
 

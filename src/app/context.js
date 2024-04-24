@@ -23,6 +23,9 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(value);
   };
 
+
+
+
   const updateUser = async (controller) => {
     try {
       const response = await getInfo(controller);

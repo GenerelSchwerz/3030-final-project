@@ -8,8 +8,10 @@ import Link from "next/link";
 import * as api from "../../utils"
 import AddPopup from "../addPopup/AddPopup";
 
-export default function NavBar() {
+import { useRouter } from "next/navigation";
 
+export default function NavBar() {
+	const router = useRouter();
 	const authContext = useAuth();
 	const [showLogin, updateShowLogin] = useState(false);
 	const [showSignup, updateShowSignup] = useState(false);
@@ -48,9 +50,10 @@ export default function NavBar() {
 	const onSearchHandler = event => {
 		if(event.key !== "Enter") return
 		console.log(event.target.value);
-		api.searchListings(event.target.value).then(data => {
-			console.log(data);
-		}).catch(console.error);
+		router.push(`/search?q=${event.target.value}`)
+		// api.searchListings(event.target.value).then(data => {
+		// 	console.log(data);
+		// }).catch(console.error);
 	}
 
 	useEffect(() => {
