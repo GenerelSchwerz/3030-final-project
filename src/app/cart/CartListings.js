@@ -9,7 +9,7 @@ import * as api from "../utils";
 export default function UserListings() {
 
   const { user } = useAuth();
-  const [shoes, setShoes] = useState(null);
+  const [shoes, setShoes] = useState([]);
 
   console.log(shoes);
 
@@ -34,7 +34,7 @@ export default function UserListings() {
 	setShoes(shoesArr);
 
     return () =>controller.abort();
-  }, [user, shoes]);
+  }, [user]);
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
@@ -45,6 +45,8 @@ export default function UserListings() {
   };
 
   return (
+	<>
+	{shoes.length > 0 ? (
     <div className="userListings">
       <hr />
       <div className="category">
@@ -67,6 +69,7 @@ export default function UserListings() {
           </Link>
         ))}
       </div>
-    </div>
+    </div>) : (<></>)}
+	</>
   );
 }
