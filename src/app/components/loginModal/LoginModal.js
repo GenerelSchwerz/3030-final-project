@@ -7,7 +7,7 @@ export default function LoginModal(props) {
 
 	const[username, setUsername] = useState("");
 	const[password, setPassword] = useState("");
-	const[sendRequest, setSendRequest] = useState("false");
+	const[sendRequest, setSendRequest] = useState(false);
 	const context = useAuth();
 
 	const onChangeUsername = event => {

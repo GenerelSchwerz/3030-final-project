@@ -2,7 +2,7 @@
 import "./NavBar2.css";
 import LoginModal from "../loginModal/LoginModal";
 import SignupModal from "../signupModal/SignupModal";
-import { useAuth } from "@/app/context";
+import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import * as api from "../../utils"

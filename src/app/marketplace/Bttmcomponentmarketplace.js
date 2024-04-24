@@ -14,7 +14,7 @@ export default function BttmComponentMarketplace() {
     api.fetchFeaturedListings(controller).then((data) => {
       console.log(data);
       setShoes(data);
-    });
+    }).catch(console.error);
 
     return () => controller.abort();
   }, []);

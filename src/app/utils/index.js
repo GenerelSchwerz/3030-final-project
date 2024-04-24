@@ -84,6 +84,32 @@ const fetchPersistentData = async (key, uri, controller, opts = {}) => {
   }
 };
 
+const fetchSessionData = async (key, uri, controller, opts = {}) => {
+  // check if local storage has the featured list from recently
+  const storedFeaturedItems = sessionStorage.getItem(key);
+  const storedFeaturedItemsParsed = storedFeaturedItems ? JSON.parse(storedFeaturedItems) : null;
+  const now = new Date();
+
+  if (storedFeaturedItemsParsed && now - new Date(storedFeaturedItemsParsed.timestamp) < DATA_EXPIRY_DURATION) {
+    return storedFeaturedItemsParsed.value;
+  }
+
+  try {
+    const data = await fetchData(uri, controller, opts);
+
+    // store the featured list in local storage
+    sessionStorage.setItem(key, JSON.stringify({ value: data, timestamp: new Date() }));
+    return data;
+  } catch (error) {
+    if (error.name === "AbortError") {
+      debug("Aborted fetch");
+      return null;
+    }
+    throw error;
+  }
+}
+
+
 /**
  *
  * @param {AbortController} controller
@@ -122,7 +148,7 @@ export const searchListings = async (query, controller, opts = {}) => {
     uri += `&${queryParams.toString()}`;
   }
 
-  return fetchPersistentData(`searchFor:${queryParams.toString()}`, uri, controller);
+  return fetchSessionData(`searchListings:${queryParams.toString()}`,uri, controller);
 };
 
 /**
@@ -142,7 +168,7 @@ export const fetchUserListings = async (userid, controller, opts = {}) => {
     uri += `?after=${opts.after}`;
   }
 
-  return fetchPersistentData(`userListings:${userid}:${queryParams.toString()}`, uri, controller);
+  return fetchSessionData(`userListings:${userid}:${queryParams.toString()}`, uri, controller);
 };
 
 export const getUser = async (username, controller) => {
