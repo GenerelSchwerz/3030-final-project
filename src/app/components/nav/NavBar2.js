@@ -6,6 +6,7 @@ import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import * as api from "../../utils"
+import AddPopup from "../addPopup/AddPopup";
 
 export default function NavBar() {
 
@@ -86,7 +87,7 @@ export default function NavBar() {
           />
           <input className="searchBar" type="text" placeholder="Search..." onKeyDown={onSearchHandler}/>
         </div>
-        {authContext.loggedIn != 1 ? (
+        {authContext.loggedIn === false ? (
           <div className="logincreateAccountButtons">
             <button className="login" onClick={onClickLogin}> Login </button>
             <button className="createAccount" onClick={onClickSignup}>Sign up</button>

@@ -1,5 +1,5 @@
 .addItemModalOverlay {
-  position: fixed;
+  position: absolute;
   background-color: rgba(255, 255, 255, .5);
   height: 100%;
   width: 100%;
@@ -39,6 +39,7 @@
   background-color: #eedcc8;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: column;
   height: 100%;
   width: 100%;
@@ -57,9 +58,11 @@
 
 .generalField,
 .description {
+
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
+  margin: 0 2px;
 }
 
 .generalField input {

@@ -107,8 +107,7 @@ const fetchSessionData = async (key, uri, controller, opts = {}) => {
     }
     throw error;
   }
-}
-
+};
 
 /**
  *
@@ -148,9 +147,7 @@ export const searchListings = async (query, controller, opts = {}) => {
     uri += `&${queryParams.toString()}`;
   }
 
-  console.log('uri:', uri)
-
-  return fetchSessionData(`searchListings:${queryParams.toString()}`,uri, controller);
+  return fetchSessionData(`searchListings:${queryParams.toString()}`, uri, controller, {});
 };
 
 /**
@@ -188,8 +185,8 @@ export const getUser = async (username, controller) => {
  * @returns
  */
 export const createListing = async (data, controller, opts = {}) => {
-	console.log(JSON.stringify(data));
-	const response = await fetchData("listing", controller, {
+  console.log(JSON.stringify(data));
+  const response = await fetchData("listing", controller, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -200,19 +197,33 @@ export const createListing = async (data, controller, opts = {}) => {
   return response; // already in json
 };
 
-export const deleteListing = async(listingId, controller) => {
-	const response = await fetchData(`listing/${listingId}`, controller, {
-		method: "DELETE",
-		headers: {
-			"Content-Type": "application/json"
-		}
-	})
-	return response;
+export const addListingToCart = async (listingId, controller) => {
+  const response = await fetchData(`listing/${listingId}/cart`, controller, {
+    method: "PUT",
+  });
+  return response;
+};
+
+export const removeListingFromCart = async (listingId, controller) => {
+  const response = await fetchData(`listing/${listingId}/cart`, controller, {
+    method: "DELETE",
+  });
+  return response;
 }
 
+export const deleteListing = async (listingId, controller) => {
+  const response = await fetchData(`listing/${listingId}`, controller, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response;
+};
+
 export const getListing = async (listingId, controller) => {
-    const key = `listing:${listingId}`;
-  return fetchPersistentData(key, `listing/${listingId}`, controller);
+  const key = `listing:${listingId}`;
+  return fetchSessionData(key, `listing/${listingId}`, controller);
 };
 
 export const login = async (email, password, controller) => {
@@ -229,12 +240,12 @@ export const login = async (email, password, controller) => {
 
 export const register = async (opts, controller) => {
   const { username, email, password, phone } = opts;
-    const response = await fetchData("register", controller, {
+  const response = await fetchData("register", controller, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, email, password }),
+    body: JSON.stringify({ username, email, password, phone }),
   });
 
   return response;

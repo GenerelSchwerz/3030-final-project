@@ -1,8 +1,11 @@
 import React from 'react';
 import Item from '../item/Item';
 import './ItemList.css';
+import { useAuth } from '@/app/context';
 
 export default function ItemList(props) {
+	const {loggedIn} = useAuth();
+
 	return (
 		<div className='item-list'>
 			<div className='item-list_Text'>
@@ -15,7 +18,7 @@ export default function ItemList(props) {
 						price={element.price} 
 						src={element.src} 
 						key={idx} 
-						auth={props.auth}/>
+						auth={loggedIn}/>
 				))}
 			</div>
 		</div>
