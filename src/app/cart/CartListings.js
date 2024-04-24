@@ -67,9 +67,7 @@ export default function UserListings() {
             <h2>{shoe.name}</h2>
             <div className="priceanddelete">
               <p>${shoe.price}</p>
-              <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
-                Delete
-              </button>
+              <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>Remove</button>
             </div>
           </div>
         ))}

@@ -78,7 +78,7 @@ export default function NavBar() {
 	<>
     <nav className="navigationBar">
       <div className="upperNav">
-        <Link href="/"><h1 className="websiteName"> Cosmic Commerce </h1></Link>
+        <Link href="/" className="link"><h1 className="websiteName"> Cosmic Commerce </h1></Link>
         <div className="searchbarcontainer">
           <img
             className="searchicon"
@@ -95,7 +95,7 @@ export default function NavBar() {
         ) : (
           <div className="loggedInButtons">
 
-      <Link href="/user">
+      <Link href="/user" className="link">
 			<button className="icon">
 				<img src="/userIcon.png"/>
 			</button>
@@ -115,7 +115,7 @@ export default function NavBar() {
         <h2 className="color">Color</h2>
         <h2 className="price">Price</h2>
 
-    <Link href="/cart">
+    <Link href="/cart" className="link">
 		<button className="cart">
 			<img src="/cartIcon.png"/>
 		</button>

@@ -8,6 +8,11 @@
   width: 100%;
 }
 
+.navigationBar .link {
+	background-color: rgba(0, 0, 0, 0.0);
+	text-decoration: none;
+}
+
 .websiteName {
   background-color: #e9d9c1;
   font-family: "Karla", sans-serif;
