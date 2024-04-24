@@ -6,7 +6,6 @@ import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import * as api from "../../utils"
-import AddPopup from "../addPopup/AddPopup";
 
 import { useRouter } from "next/navigation";
 
@@ -81,7 +80,7 @@ export default function NavBar() {
 	<>
     <nav className="navigationBar">
       <div className="upperNav">
-        <Link href="/"><h1 className="websiteName"> Cosmic Commerce </h1></Link>
+        <Link href="/" className="link"><h1 className="websiteName"> Cosmic Commerce </h1></Link>
         <div className="searchbarcontainer">
           <img
             className="searchicon"
@@ -97,9 +96,25 @@ export default function NavBar() {
           </div>
         ) : (
           <div className="loggedInButtons">
-			<Link href="/user"><button>user picture</button></Link>
-			<button>Messages picture</button>
-			<button onClick={onSignOutHandler}>Sign out</button>
+
+      		<Link href="/user" className="link">
+			<button className="icon">
+				<img src="/userIcon.png"/>
+			</button>
+      		</Link>
+
+
+    	<Link href="/cart" className="link">
+			<button className="cart">
+				<img src="/cartIcon.png"/>
+			</button>
+    	</Link>
+			<button className="icon">
+				<img src="/messagingIcon.webp"/>
+			</button>
+
+			<button onClick={onSignOutHandler}>Sign Out</button>
+
 		  </div>
         )}
       </div>
@@ -109,7 +124,6 @@ export default function NavBar() {
         <h2 className="childrens">Children's</h2>
         <h2 className="color">Color</h2>
         <h2 className="price">Price</h2>
-		<Link href="/cart"><button>cart picture</button></Link>
       </div>
     </nav>
 	<LoginModal show={showLogin} submitButtonHandler={onLoginSubmitHandler} exitButtonHandler={onExitHandler} createAccountHandler={onCreateAccountHandler}/>

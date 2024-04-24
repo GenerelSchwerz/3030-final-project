@@ -8,11 +8,17 @@
   width: 100%;
 }
 
+.navigationBar .link {
+	background-color: rgba(0, 0, 0, 0.0);
+	text-decoration: none;
+}
+
 .websiteName {
   background-color: #e9d9c1;
   font-family: "Karla", sans-serif;
   font-weight: 500;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text-shadow here */
+  color: black;
 }
 .hidden {
   display: none;
@@ -108,4 +114,37 @@
   display: block;
   border-bottom: 3px solid black;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.loggedInButtons {
+  display: flex;
+  width: 200px;
+  padding: 5px;
+  justify-content: space-between;
+  background-color: #e9d9c1;
+}
+
+.loggedInButtons img {
+  width: 30px;
+}
+
+.loggedInButtons button {
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.icon {
+  all: unset;
+}
+
+.icon img {
+  background-color: #e9d9c1;
+}
+
+.cart img {
+  width: 30px;
+  background-color: #e9d9c1;
+}
+.cart {
+  all: unset;
 }
