@@ -1,17 +1,31 @@
 "use client";
 
 import NavBar from "../components/nav/NavBar2";
-import { AuthProvider } from "../context";
-import Carousel2 from "../components/carousel/Carousel2";
-import Checkout from ".//Checkout";
-export default function CheckoutPage() {
-    return (
-        <>
-        <AuthProvider>
-            <NavBar />
-            <Carousel2 />
-            <Checkout />
-        </AuthProvider>
-        </>
-    );
+import Checkout from "./Checkout";
+import { useAuth } from "../context";
+
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+export default function Home() {
+
+  const router = useRouter();
+  const {loggedIn, user} = useAuth();
+
+  useEffect(() => {
+    if(!loggedIn) {
+      console.log('NOT LOGGED IN', user)
+      router.push("/");
+    }
+
+  })
+
+
+  return (
+    <>
+      <NavBar />
+	  <Checkout/>
+    </>
+  );
 }

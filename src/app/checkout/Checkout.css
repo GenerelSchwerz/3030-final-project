@@ -30,7 +30,7 @@
     background-color: #EEEFF5;
 }
 .formCheck {
-    width: 100%; 
+    width: 100%;
     display: flex;
     justify-content: center;
     padding-top: 25px;
@@ -46,7 +46,7 @@
     background-color: #EEEFF5;
     margin: 10px;
 }
-  
+
 .nameCheckout input {
     all: unset;
     width: 250px;
@@ -55,7 +55,7 @@
     text-align: center;
     border-radius: 25px;
 }
-  
+
 input[type="email"] {
     all: unset;
     margin: 20px 0px 30px 10px;
@@ -68,13 +68,12 @@ input[type="email"] {
 
 .orderSummary {
     padding-top: 20px;
-    display: flex;
-    flex-direction: column;
     border-radius: 25px;
     text-align: center;
     width: 60%;
-    height: 90%;
+    height: 60%;
     background-color: white;
+	border: solid 1px black;
 }
 .orderSummary p, h2 {
     background-color: white;
@@ -86,4 +85,46 @@ input[type="email"] {
     color: white;
     padding: 10px 20px 10px 20px;
     border-radius: 25px;
+}
+
+.checkoutShoeGrid {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	overflow-y: scroll;
+}
+
+.checkoutContainer .shoeCard * {
+	background-color: white;
+	border: none;
+	margin-top:auto;
+	margin-bottom: auto;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.checkoutContainer .shoeCard {
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+	height: 11%;
+	width: 80%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.checkoutContainer .shoeCard img {
+	height: 100%;
+	width: 100%;
+}
+
+.checkoutContainer .deleteButton {
+	cursor: pointer;
+}
+
+.checkoutContainer .deleteButton:hover {
+	background-color: gray;
 }
