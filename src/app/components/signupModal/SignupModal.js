@@ -44,7 +44,7 @@ export default function SignupModal(props) {
       		console.log(data);
 			props.submitButtonHandler();
 			setSendRequest(false);
-			context.setLoggedIn(true);
+			context.setLoggedIn(true, data.token);
     	}).catch(err => {
 			console.log(err);
 			setSendRequest(false);

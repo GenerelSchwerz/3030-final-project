@@ -63,7 +63,7 @@ export default function NavBar() {
 		return () => {
 			controller.abort();
 	};
-	}, [sendLogout]);
+	}, [sendLogout, authContext]);
 
   return (
 	<>

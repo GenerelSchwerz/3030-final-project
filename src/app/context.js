@@ -23,6 +23,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     else if (value === false) localStorage.removeItem('token');
+    else throw new Error('Invalid value for setLoggedIn');
+    
     setLoggedIn(value);
   }
 
