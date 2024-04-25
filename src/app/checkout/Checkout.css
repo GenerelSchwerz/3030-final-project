@@ -77,9 +77,12 @@ input[type="email"] {
     flex-direction: column;
 	border: solid 1px black;
 }
-.orderSummary p, h2 {
+
+.orderSummary p, 
+.orderSummary h2 {
     background-color: white;
 }
+
 .confirmCheckout {
     all: unset;
     margin-top: 20px;
@@ -117,7 +120,7 @@ input[type="email"] {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 15px;
-	height: 14%;
+	height: 25%;
 	width: 80%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;

@@ -8,6 +8,7 @@ export default function Checkout() {
 
 	const { user } = useAuth();
   const [shoes, setShoes] = useState([]);
+  const [fakeRefresh, setRefresh] = useState("");
 
   const cb = useCallback(
     async (controller) => {
@@ -29,11 +30,13 @@ export default function Checkout() {
 
       setShoes(shoesArr);
     },
-    [user]
+    [user, fakeRefresh]
   );
 
   useEffect(() => {
     const controller = new AbortController();
+    console.log("i ran");
+    setRefresh("asgdf");
     cb(controller);
     return () => controller.abort();
   }, [cb]);
