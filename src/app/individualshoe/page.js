@@ -22,6 +22,7 @@ export default function Individualshoepage({ searchParams }) {
     return () => controller.abort();
   }, [searchParams]);
 
+
   return shoeData == null ? (
     <div>Loading...</div>
   ) : (

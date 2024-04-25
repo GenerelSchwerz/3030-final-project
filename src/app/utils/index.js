@@ -205,9 +205,13 @@ export const addListingToCart = async (listingId, controller) => {
 };
 
 export const editListing = async (data, controller) => {
-  const response = await fetchData("listing", controller, {
+  if (!data.id) {
+    throw new Error("Missing listing id");
+  }
+
+  const response = await fetchData(`listing/${data.id}`, controller, {
     method: "PUT",
-    header: {
+    headers: {
       "Content-Type" : "application/json",
     },
     body: JSON.stringify(data)

@@ -2,63 +2,36 @@
 
 import "./UserListings.css";
 import { useState, useEffect } from "react";
-import EditPopup from "../components/editPopup/EditPopup"
+import EditPopup from "../components/editPopup/EditPopup";
 import Link from "next/link";
 
 import { useAuth } from "../context";
 import * as api from "../utils";
 
-export default function UserListings(props) {
+export default function UserListings({ shoes, setShoes, handleEdit }) {
   const { user } = useAuth();
 
-  const [shoes, setShoes] = useState(null);
-  const [deleteRequest, setDeleteRequest] = useState(null);
+  // const [shoes, setShoes] = useState(null);
+  const [deleteRequest, setDeleteRequest] = useState(false);
 
   useEffect(() => {
-    console.log('suppp')
-    if (shoes != null && user != null && deleteRequest == null) {
-      return;
-    }
-
+    if (!deleteRequest) return;
     const controller = new AbortController();
+    api
+      .deleteListing(deleteRequest, controller)
+      .then((data) => {
+        console.log(data);
+        setShoes((prevShoes) => prevShoes.filter((shoe) => shoe.id !== deleteRequest));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setDeleteRequest(false);
+      });
 
-    if (user != null && shoes == null) {
-      api
-        .fetchUserListings(user.id, controller)
-        .then((data) => {
-          console.log(data);
-          setShoes(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    if (user != null && deleteRequest != null) {
-      console.log("sending delete");
-      api
-        .deleteListing(deleteRequest, controller)
-        .then((data) => {
-          console.log(data);
-          setDeleteRequest(null);
-        })
-        .catch((err) => {
-          console.log(err);
-          setDeleteRequest(null);
-        });
-    }
-
-    return () => {
-      if (
-        user != null &&
-        shoes != null &&
-        deleteRequest == null &&
-        controller != null
-      ) {
-        controller.abort();
-      }
-    };
-  }, [user, deleteRequest, shoes]);
+    return () => controller.abort();
+  }, [deleteRequest, setShoes]);
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
@@ -66,10 +39,25 @@ export default function UserListings(props) {
     console.log(deleteRequest);
   };
 
-  const handleEdit = (e, shoe) => {
-	e.preventDefault();
-	props.handleEdit(shoe);
-  }
+  const handleEdit1 = (e, shoe) => {
+    e.preventDefault();
+    handleEdit(shoe);
+
+    const foundShoe = shoes.find((s) => s.id === shoe.id);
+    console.log("editing", foundShoe, shoe);
+    if (!foundShoe) {
+      return;
+    }
+
+    const updatedShoes = shoes.map((s) => {
+      if (s.id === shoe.id) {
+        return { ...s, ...shoe };
+      }
+      return s;
+    });
+
+    setShoes(updatedShoes);
+  };
 
   return (
     <div className="bttmComponent">
@@ -81,10 +69,7 @@ export default function UserListings(props) {
       <div className="shoe-grid">
         {shoes?.map((shoe) => (
           <div className="shoe-card" key={shoe.id}>
-            <Link
-              href={`/individualshoe?shoeId=${shoe.id}`}
-              className="shoecardbuttonlink"
-            >
+            <Link href={`/individualshoe?shoeId=${shoe.id}`} className="shoecardbuttonlink">
               {shoe.sideview ? (
                 <img
                   src={shoe.sideview}
@@ -102,8 +87,12 @@ export default function UserListings(props) {
             <h2>{shoe.name}</h2>
             <div className="priceandplus">
               <p>${shoe.price}</p>
-              <button className="editbutton" onClick={(e) => handleEdit(e, shoe)}>Edit</button>
-              <button className="deletebutton" onClick={(e) => handleDelete(e, shoe.id)}>Delete</button>
+              <button className="editbutton" onClick={(e) => handleEdit1(e, shoe)}>
+                Edit
+              </button>
+              <button className="deletebutton" onClick={(e) => handleDelete(e, shoe.id)}>
+                Delete
+              </button>
             </div>
           </div>
         ))}
