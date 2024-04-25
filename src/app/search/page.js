@@ -58,7 +58,7 @@ export default function SearchPage({ searchParams }) {
   return (
     <>
       <NavBar />
-	  <div className="bttmComponent">
+	    <div className="bttmComponent">
       {shoes == null ? (
         <div>Loading...</div>
       ) : (

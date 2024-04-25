@@ -24,12 +24,12 @@ export default function Home() {
   })
 
   const handleEdit = shoe => {
-	console.log(shoe);
-	setEditShoe(shoe);
+    console.log(shoe);
+    setEditShoe(shoe);
   }
 
   const onExit = e => {
-	setEditShoe(null);
+	  setEditShoe(null);
   }
 
   return (

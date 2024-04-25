@@ -28,33 +28,53 @@ export default function AddPopup({propShoe, show, onExit}) {
 	setSawData(true);
   }
 
-  const handleSubmit = (event) => {
-		event.preventDefault();
+//   const handleSubmit = (event) => {
+// 		event.preventDefault();
 
-		api.deleteListing(propShoe.id).then(data => {
-			console.log(data);
-		}).catch(err => {
-			console.log(err);
-		});
+// 		api.deleteListing(propShoe.id).then(data => {
+// 			console.log(data);
+// 		}).catch(err => {
+// 			console.log(err);
+// 		});
 
-		let info = {
-			name: shoeName,
-			model: model,
-			price: parseFloat(price),
-			size: size,
-			topview: topview,
-			sideview: sideview,
-			frontview: frontview,
-			description: description
-		}
+// 		let info = {
+// 			name: shoeName,
+// 			model: model,
+// 			price: parseFloat(price),
+// 			size: size,
+// 			topview: topview,
+// 			sideview: sideview,
+// 			frontview: frontview,
+// 			description: description
+// 		}
 
-		api.createListing(info).then((data) => {
-			console.log(data);
-		}).catch(err => {
-			console.log(err);
-			setTitle("Error");
-		});
+// 		api.createListing(info).then((data) => {
+// 			console.log(data);
+// 		}).catch(err => {
+// 			console.log(err);
+// 			setTitle("Error");
+// 		});
+// 	}
+
+const handleSubmit = (event) => {
+	event.preventDefault();
+
+	let info = {
+		name: shoeName,
+		model: model,
+		price: parseFloat(price),
+		size: size,
+		topview: topview,
+		sideview: sideview,
+		frontview: frontview,
+		description: description,
+		id: propShoe.id
 	}
+
+	api.editListing(info).then(data => {
+		console.log(data);
+	}).then(err => console.log(err));
+}
 
   return (
 	<>
