@@ -9,6 +9,8 @@ import * as api from "../utils";
 
 export default function BttmComponentMarketplace({shoes}) {
 
+  const { user } = useAuth();
+
   const [cart, setCart] = useState([]);
 
 
