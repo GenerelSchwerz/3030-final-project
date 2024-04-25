@@ -40,8 +40,6 @@ export default function Checkout() {
 
   useEffect(() => {
     const controller = new AbortController();
-    console.log("i ran");
-    setRefresh("asgdf");
     cb(controller);
     return () => controller.abort();
   }, [cb]);
