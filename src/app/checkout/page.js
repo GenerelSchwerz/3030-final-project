@@ -1,8 +1,7 @@
 "use client";
 
 import NavBar from "../components/nav/NavBar2";
-import AddPopup from "../components/addPopup/AddPopup";
-import CartListings from "./CartListings"
+import Checkout from "./Checkout";
 import { useAuth } from "../context";
 
 
@@ -26,7 +25,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-	  <CartListings/>
+	  <Checkout/>
     </>
   );
 }

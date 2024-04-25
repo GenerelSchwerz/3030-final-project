@@ -204,6 +204,17 @@ export const addListingToCart = async (listingId, controller) => {
   return response;
 };
 
+export const editListing = async (data, controller) => {
+  const response = await fetchData("listing", controller, {
+    method: "PUT",
+    header: {
+      "Content-Type" : "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+  return response
+};
+
 export const removeListingFromCart = async (listingId, controller) => {
   const response = await fetchData(`listing/${listingId}/cart`, controller, {
     method: "DELETE",

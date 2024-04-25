@@ -105,7 +105,7 @@ export default function NavBar() {
       		</Link>
 
 
-    	<Link href="/cart" className="link">
+    	<Link href="/checkout" className="link">
 			<button className="cart">
 				<img src="/cartIcon.png"/>
 			</button>

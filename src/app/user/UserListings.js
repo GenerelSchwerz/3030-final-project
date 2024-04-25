@@ -2,12 +2,13 @@
 
 import "./UserListings.css";
 import { useState, useEffect } from "react";
+import EditPopup from "../components/editPopup/EditPopup"
 import Link from "next/link";
 
 import { useAuth } from "../context";
 import * as api from "../utils";
 
-export default function UserListings() {
+export default function UserListings(props) {
   const { user } = useAuth();
 
   const [shoes, setShoes] = useState(null);
@@ -48,7 +49,12 @@ export default function UserListings() {
     }
 
     return () => {
-      if (user != null && shoes != null && deleteRequest == null && controller != null) {
+      if (
+        user != null &&
+        shoes != null &&
+        deleteRequest == null &&
+        controller != null
+      ) {
         controller.abort();
       }
     };
@@ -60,27 +66,46 @@ export default function UserListings() {
     console.log(deleteRequest);
   };
 
+  const handleEdit = (e, shoe) => {
+	e.preventDefault();
+	props.handleEdit(shoe);
+  }
+
   return (
-    <div className="userListings">
+    <div className="bttmComponent">
       <hr />
       <div className="category">
-        <h1>Your Items</h1>
+        <h1> Your Items</h1>
       </div>
 
       <div className="shoe-grid">
         {shoes?.map((shoe) => (
-          <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
-            <div className="shoe-card">
-              <img src={shoe.sideview} alt={shoe.name} />
-              <h2>{shoe.name}</h2>
-              <div className="priceanddelete">
-                <p>${shoe.price}</p>
-                <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
-                  Delete
-                </button>
-              </div>
+          <div className="shoe-card" key={shoe.id}>
+            <Link
+              href={`/individualshoe?shoeId=${shoe.id}`}
+              className="shoecardbuttonlink"
+            >
+              {shoe.sideview ? (
+                <img
+                  src={shoe.sideview}
+                  alt={shoe.name}
+                  onError={(e) => {
+                    const emptyDiv = document.createElement("div");
+                    emptyDiv.className = "empty-image";
+                    e.target.replaceWith(emptyDiv);
+                  }}
+                />
+              ) : (
+                <div className="empty-image"></div>
+              )}
+            </Link>
+            <h2>{shoe.name}</h2>
+            <div className="priceandplus">
+              <p>${shoe.price}</p>
+              <button className="editbutton" onClick={(e) => handleEdit(e, shoe)}>Edit</button>
+              <button className="deletebutton" onClick={(e) => handleDelete(e, shoe.id)}>Delete</button>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
