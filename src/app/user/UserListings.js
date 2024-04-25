@@ -35,8 +35,12 @@ export default function UserListings({ shoes, setShoes, handleEdit }) {
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
-    setDeleteRequest(shoeId);
-    console.log(deleteRequest);
+    
+    api.deleteListing(shoeId)
+    .then(data => console.log(data))
+    .catch((err) => console.log(err));
+
+    setShoes((prevShoes) => prevShoes.filter(shoe => shoe.id !== shoeId));
   };
 
   const handleEdit1 = (e, shoe) => {

@@ -55,6 +55,10 @@ export default function NavBar() {
 		// }).catch(console.error);
 	}
 
+	const onClickSearh = e => {
+		router.push(`/search?q=${event.target.className}`)
+	}
+
 	useEffect(() => {
 		if(!sendLogout) {
 			return;
@@ -120,11 +124,11 @@ export default function NavBar() {
         )}
       </div>
       <div className="lowernav">
-        <h2 className="womens">Women's</h2>
-        <h2 className="mens">Men's</h2>
-        <h2 className="childrens">Children's</h2>
-        <h2 className="color">Color</h2>
-        <h2 className="price">Price</h2>
+        <h2 onClick={onClickSearh} className="womens">Women's</h2>
+        <h2 onClick={onClickSearh} className="mens">Men's</h2>
+        <h2 onClick={onClickSearh} className="childrens">Children's</h2>
+        <h2 onClick={onClickSearh} className="color">Color</h2>
+        <h2 onClick={onClickSearh} className="price">Price</h2>
       </div>
     </nav>
 	<LoginModal show={showLogin} submitButtonHandler={onLoginSubmitHandler} exitButtonHandler={onExitHandler} createAccountHandler={onCreateAccountHandler}/>

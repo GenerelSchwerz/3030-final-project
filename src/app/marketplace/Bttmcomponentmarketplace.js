@@ -7,7 +7,7 @@ import { useAuth } from "../context";
 
 import * as api from "../utils";
 
-export default function BttmComponentMarketplace({shoes}) {
+export default function BttmComponentMarketplace({shoes, title}) {
 
   const { user } = useAuth();
 
@@ -60,7 +60,7 @@ export default function BttmComponentMarketplace({shoes}) {
     <div className="bttmComponent">
       <hr />
       <div className="category">
-        <h1> Women's</h1>
+        <h1> {title} </h1>
       </div>
 
       <div className="shoe-grid">
