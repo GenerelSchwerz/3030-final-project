@@ -59,7 +59,7 @@ export default function SearchPage({ searchParams }) {
   return (
     <>
       <NavBar />
-      <BttmComponentMarketplace shoes={shoes} />
+      <BttmComponentMarketplace shoes={shoes} title={searchParams.q}/>
     </>
   );
 }

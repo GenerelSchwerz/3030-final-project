@@ -2,7 +2,6 @@
 
 import "./UserListings.css";
 import { useState, useEffect } from "react";
-import EditPopup from "../components/editPopup/EditPopup"
 import Link from "next/link";
 
 import { useAuth } from "../context";
@@ -12,58 +11,32 @@ export default function UserListings(props) {
   const { user } = useAuth();
 
   const [shoes, setShoes] = useState(null);
-  const [deleteRequest, setDeleteRequest] = useState(null);
 
   useEffect(() => {
-    console.log('suppp')
-    if (shoes != null && user != null && deleteRequest == null) {
+    if (user == null) {
       return;
     }
 
     const controller = new AbortController();
 
-    if (user != null && shoes == null) {
-      api
-        .fetchUserListings(user.id, controller)
-        .then((data) => {
-          console.log(data);
-          setShoes(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+      api.fetchUserListings(user.id, controller)
+      .then((data) => {
+        console.log(data);
+        setShoes(data);
+      })
+      .catch((err) => console.log(err));
 
-    if (user != null && deleteRequest != null) {
-      console.log("sending delete");
-      api
-        .deleteListing(deleteRequest, controller)
-        .then((data) => {
-          console.log(data);
-          setDeleteRequest(null);
-        })
-        .catch((err) => {
-          console.log(err);
-          setDeleteRequest(null);
-        });
-    }
-
-    return () => {
-      if (
-        user != null &&
-        shoes != null &&
-        deleteRequest == null &&
-        controller != null
-      ) {
-        controller.abort();
-      }
-    };
-  }, [user, deleteRequest, shoes]);
+    return () => controller.abort()
+  }, [user]);
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
-    setDeleteRequest(shoeId);
-    console.log(deleteRequest);
+    
+    api.deleteListing(shoeId)
+    .then(data => console.log(data))
+    .catch((err) => console.log(err));
+
+    setShoes((prevShoes) => prevShoes.filter(shoe => shoe.id !== shoeId));
   };
 
   const handleEdit = (e, shoe) => {
