@@ -36,8 +36,8 @@ export default function Home() {
     <>
       <NavBar />
       <AddPopup/>
-	  <EditPopup propShoe={editShoe} show={editShoe != null ? true:false} onExit={onExit}/>
-	  <UserListings handleEdit={handleEdit}/>
+      <EditPopup propShoe={editShoe} show={editShoe != null ? true:false} onExit={onExit}/>
+      <UserListings handleEdit={handleEdit}/>
     </>
   );
 }

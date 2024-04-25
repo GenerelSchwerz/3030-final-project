@@ -52,7 +52,7 @@ export default function Checkout() {
     };
 
     return (
-        <div className="checkoutContainer">
+      <div className="checkoutContainer">
             <div className="topCheck">
                 <Link href="/marketplace">
                     <img src="/leftarrow.png"/>
@@ -79,8 +79,8 @@ export default function Checkout() {
                           <img src={shoe.sideview} alt={shoe.name} />
                         </Link>
                         <h2>{shoe.name}</h2>
-                    <p>${shoe.price}</p>
-                            <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>Remove</button>
+                        <p>${shoe.price}</p>
+                        <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>Remove</button>
                       </div>
                     ))}
                 </div>

@@ -1,6 +1,5 @@
 import "./Bttmcomponentmarketplace.css";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 
@@ -9,7 +8,7 @@ import { useAuth } from "../context";
 import * as api from "../utils";
 
 export default function BttmComponentMarketplace() {
-  const {updateUser} = useAuth();
+  const {user} = useAuth();
 
   const [shoes, setShoes] = useState([]);
   const [cart, setCart] = useState([]);
@@ -102,7 +101,18 @@ export default function BttmComponentMarketplace() {
             <div className="priceandplus">
               <p>${shoe.price}</p>
               <button className="cartbutton" onClick={(e) => handleCartClick(e, shoe.id)}>
-                <img src="/plussign.svg" alt="Plussing Icon" className="plussing-icon" />
+                {user != null ? (
+                  <>
+                  {cart.findIndex(e => e == shoe.id) == -1 ? (
+                    <img src="/plussign.svg" alt="Plussing Icon" className="plussing-icon" />
+                    ):(
+                      <p>Remove</p>
+                    )
+                  }
+                  </>
+                ):(
+                  <p>Login to purchase!</p>
+                )}
               </button>
             </div>
           </div>
