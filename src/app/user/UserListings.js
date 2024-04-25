@@ -101,8 +101,8 @@ export default function UserListings(props) {
             <h2>{shoe.name}</h2>
             <div className="priceandplus">
               <p>${shoe.price}</p>
-			  <button className="editbutton" onClick={(e) => handleEdit(e, shoe)}>Edit</button>
-			  <button className="deletebutton" onClick={(e) => handleDelete(e, shoe.id)}>Delete</button>
+              <button className="editbutton" onClick={(e) => handleEdit(e, shoe)}>Edit</button>
+              <button className="deletebutton" onClick={(e) => handleDelete(e, shoe.id)}>Delete</button>
             </div>
           </div>
         ))}

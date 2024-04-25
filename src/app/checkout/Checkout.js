@@ -72,18 +72,18 @@ export default function Checkout() {
             <div className="orderSummary">
                 <h2>Order Summary</h2>
                 <p>A confirmation of the order will be sent to your email.</p>
-				<div className="checkoutShoeGrid">
-					{shoes?.map((shoe) => (
-				      <div className="shoeCard" key={shoe.id}>
-				        <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
-				          <img src={shoe.sideview} alt={shoe.name} />
-				        </Link>
-				        <h2>{shoe.name}</h2>
-						<p>${shoe.price}</p>
-              			<button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>Remove</button>
-				      </div>
-				    ))}
-				</div>
+                <div className="checkoutShoeGrid">
+                  {shoes?.map((shoe) => (
+                      <div className="shoeCard" key={shoe.id}>
+                        <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
+                          <img src={shoe.sideview} alt={shoe.name} />
+                        </Link>
+                        <h2>{shoe.name}</h2>
+                    <p>${shoe.price}</p>
+                            <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>Remove</button>
+                      </div>
+                    ))}
+                </div>
             </div>
             <button className ="confirmCheckout" onClick={submitForm}>Confirm Order</button>
         </div>
