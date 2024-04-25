@@ -2,12 +2,13 @@
 
 import "./UserListings.css";
 import { useState, useEffect } from "react";
+import EditPopup from "../components/editPopup/EditPopup"
 import Link from "next/link";
 
 import { useAuth } from "../context";
 import * as api from "../utils";
 
-export default function UserListings() {
+export default function UserListings(props) {
   const { user } = useAuth();
 
   const [shoes, setShoes] = useState(null);
@@ -64,6 +65,11 @@ export default function UserListings() {
     console.log(deleteRequest);
   };
 
+  const handleEdit = (e, shoe) => {
+	e.preventDefault();
+	props.handleEdit(shoe);
+  }
+
   return (
     <div className="bttmComponent">
       <hr />
@@ -73,7 +79,6 @@ export default function UserListings() {
 
       <div className="shoe-grid">
         {shoes?.map((shoe) => (
-          // <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
           <div className="shoe-card" key={shoe.id}>
             <Link
               href={`/individualshoe?shoeId=${shoe.id}`}
@@ -86,8 +91,8 @@ export default function UserListings() {
                   onError={(e) => {
                     const emptyDiv = document.createElement("div");
                     emptyDiv.className = "empty-image";
-                    e.target.replaceWith(emptyDiv); // Replace with empty div with class name "empty-image"
-                  }} // Replace image with empty div if it fails to load
+                    e.target.replaceWith(emptyDiv);
+                  }}
                 />
               ) : (
                 <div className="empty-image"></div>
@@ -96,13 +101,10 @@ export default function UserListings() {
             <h2>{shoe.name}</h2>
             <div className="priceandplus">
               <p>${shoe.price}</p>
-              <button
-                className="deletebutton"
-                onClick={(e) => handleDelete(e, shoe.id)}
-              >Delete</button>
+			  <button className="editbutton" onClick={(e) => handleEdit(e, shoe)}>Edit</button>
+			  <button className="deletebutton" onClick={(e) => handleDelete(e, shoe.id)}>Delete</button>
             </div>
           </div>
-          // </Link>
         ))}
       </div>
     </div>
