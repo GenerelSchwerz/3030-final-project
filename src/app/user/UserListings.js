@@ -14,6 +14,7 @@ export default function UserListings() {
   const [deleteRequest, setDeleteRequest] = useState(null);
 
   useEffect(() => {
+    console.log('suppp')
     if (shoes != null && user != null && deleteRequest == null) {
       return;
     }

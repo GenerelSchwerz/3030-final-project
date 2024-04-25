@@ -65,6 +65,7 @@ export default function NavBar() {
 			console.log(data);
 			updateSendLogout(false);
 			authContext.setLoggedIn(false);
+			authContext.setUser(null);
 		}).catch(err => {
 			console.log(err);
 			updateSendLogout(false);

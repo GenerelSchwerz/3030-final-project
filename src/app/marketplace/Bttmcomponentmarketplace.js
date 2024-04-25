@@ -8,24 +8,10 @@ import { useAuth } from "../context";
 
 import * as api from "../utils";
 
-export default function BttmComponentMarketplace() {
-  const {updateUser} = useAuth();
+export default function BttmComponentMarketplace({shoes}) {
 
-  const [shoes, setShoes] = useState([]);
   const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    api
-      .fetchFeaturedListings(controller)
-      .then((data) => {
-        console.log(data);
-        setShoes(data);
-      })
-      .catch(console.error);
-
-    return () => controller.abort();
-  }, []);
 
   useEffect(() => {
     const controller = new AbortController();

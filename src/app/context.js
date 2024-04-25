@@ -4,7 +4,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { getInfo } from "./utils";
 
 /**
- * @type {React.Context<{ user: any; loggedIn: boolean; setLoggedIn: (value: boolean, token?: string) => any | null; updateUser: (controller: AbortController) => void; }>}
+ * @type {React.Context<{ user: any; loggedIn: boolean; setLoggedIn: (value: boolean, token?: string) => void; updateUser: (controller: AbortController) => Promise<any>; setUser: React.Dispatch<React.SetStateAction<any>> }>}
+ * 
  */
 const AuthContext = createContext(); // Creates a Context object.
 
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     else throw new Error("Invalid value for setLoggedIn");
 
     setLoggedIn(value);
+    
   };
 
 
@@ -67,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     return () => controller.abort();
   }, [setLoggedIn]);
 
-  return <AuthContext.Provider value={{ user, loggedIn, setLoggedIn: setSetLoggedIn, updateUser }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, loggedIn, setLoggedIn: setSetLoggedIn, updateUser, setUser }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext); // Custom hook to use the auth context

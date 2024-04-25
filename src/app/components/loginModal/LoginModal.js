@@ -36,9 +36,16 @@ export default function LoginModal(props) {
 			setSendRequest(false);
 			console.log(data)
 			context.setLoggedIn(true, data.token);
+			context.setUser(data);
     	}).catch(err => {
+			if (err.name === "AbortError") {
+				console.log("Request Aborted");
+				return;
+			}
 			console.log(err);
 			setSendRequest(false);
+			context.setLoggedIn(false);
+			context.setUser(null)
 		});
 
 		return () => {

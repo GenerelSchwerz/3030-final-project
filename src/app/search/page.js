@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NavBar from "../components/nav/NavBar2";
 
 import * as api from "../utils";
+import BttmComponentMarketplace from "../marketplace/Bttmcomponentmarketplace";
 
 export default function SearchPage({ searchParams }) {
   const [shoeData, setShoeData] = useState(null);
@@ -25,17 +26,7 @@ export default function SearchPage({ searchParams }) {
   return (
     <>
       <NavBar />
-      {shoeData == null ? (
-        <div>Loading...</div>
-      ) : (
-        shoeData.map((shoe) => (
-          <div key={shoe.id} className="shoeresult">
-            <img src={shoe.image} alt={shoe.name} />
-            <h2>{shoe.name}</h2>
-            <p>{shoe.description}</p>
-          </div>
-        ))
-      )}
+      <BttmComponentMarketplace shoes={shoeData} />
     </>
   );
 }
