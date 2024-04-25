@@ -6,6 +6,7 @@ import * as api from "../utils";
 
 export default function Checkout() {
   const [shoes, setShoes] = useState([]);
+  const [fakeRefresh, setRefresh] = useState("");
 
   const cb = useCallback(async (controller) => {
     const user1 = await api.getInfo(controller);
@@ -39,6 +40,8 @@ export default function Checkout() {
 
   useEffect(() => {
     const controller = new AbortController();
+    console.log("i ran");
+    setRefresh("asgdf");
     cb(controller);
     return () => controller.abort();
   }, [cb]);
