@@ -5,32 +5,37 @@ import { useAuth } from "../context";
 import * as api from "../utils";
 
 export default function Checkout() {
-
-	const { user } = useAuth();
   const [shoes, setShoes] = useState([]);
 
-  const cb = useCallback(
-    async (controller) => {
-      const user1 = user;
-      if (user1 == null) return;
-      if (user1.cart == null) return;
+  const cb = useCallback(async (controller) => {
+    const user1 = await api.getInfo(controller);
+    console.log(user1);
 
-      let shoesArr = [];
+    // const user1 = user;
+    if (user1 == null) return;
+    if (user1.cart == null) return;
 
-      await Promise.all(
-        user1.cart.map(async (id) => {
+    let shoesArr = [];
+
+    await Promise.all(
+      user1.cart.map(async (id) => {
+        try {
           const data = await api.getListing(id, controller);
           if (data == null) return;
           shoesArr.push(data);
-        })
-      );
+        } catch (err) {
+          if (err.name === "AbortError") {
+            console.log("Fetch aborted");
+          }
+          console.error(err);
+        }
+      })
+    );
 
-      shoesArr.sort((a, b) => a.id - b.id);
+    shoesArr.sort((a, b) => a.id - b.id);
 
-      setShoes(shoesArr);
-    },
-    [user]
-  );
+    setShoes(shoesArr);
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -40,52 +45,54 @@ export default function Checkout() {
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
-    api
-      .removeListingFromCart(shoeId)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    api.removeListingFromCart(shoeId).then(console.log).catch(console.error);
     setShoes(shoes.filter((shoe) => shoe.id !== shoeId));
   };
 
-    const submitForm = () => {
-        document.getElementById("checkoutConfirmation").submit();
-    };
+  const submitForm = () => {
+    document.getElementById("checkoutConfirmation").submit();
+    api.checkout().then(console.log).catch(console.error);
+  };
 
-    return (
-      <div className="checkoutContainer">
-            <div className="topCheck">
-                <Link href="/marketplace">
-                    <img src="/leftarrow.png"/>
-                </Link>
-                <h1>Checkout</h1>
-            </div>
+  return (
+    <div className="checkoutContainer">
+      <div className="topCheck">
+        <Link href="/marketplace">
+          <img src="/leftarrow.png" />
+        </Link>
+        <h1>Checkout</h1>
+      </div>
 
-            <div className="formCheck">
-                <form id="checkoutConfirmation">
-                    <div className="nameCheckout">
-                        <input type="text" placeholder="First Name"/>
-                        <input type="text" placeholder="Last Name" />
-                    </div>
-                    <input type="email" placeholder="Confirm Email"/>
-                </form>
+      <div className="formCheck">
+        <form id="checkoutConfirmation">
+          <div className="nameCheckout">
+            <input type="text" placeholder="First Name" />
+            <input type="text" placeholder="Last Name" />
+          </div>
+          <input type="email" placeholder="Confirm Email" />
+        </form>
+      </div>
+      <div className="orderSummary">
+        <h2>Order Summary</h2>
+        <p>A confirmation of the order will be sent to your email.</p>
+        <div className="checkoutShoeGrid">
+          {shoes?.map((shoe) => (
+            <div className="shoeCard" key={shoe.id}>
+              <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
+                <img src={shoe.sideview} alt={shoe.name} />
+              </Link>
+              <h2>{shoe.name}</h2>
+              <p>${shoe.price}</p>
+              <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
+                Remove
+              </button>
             </div>
-            <div className="orderSummary">
-                <h2>Order Summary</h2>
-                <p>A confirmation of the order will be sent to your email.</p>
-                <div className="checkoutShoeGrid">
-                  {shoes?.map((shoe) => (
-                      <div className="shoeCard" key={shoe.id}>
-                        <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
-                          <img src={shoe.sideview} alt={shoe.name} />
-                        </Link>
-                        <h2>{shoe.name}</h2>
-                        <p>${shoe.price}</p>
-                        <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>Remove</button>
-                      </div>
-                    ))}
-                </div>
-            </div>
-            <button className ="confirmCheckout" onClick={submitForm}>Confirm Order</button>
+          ))}
         </div>
-    );
+      </div>
+      <button className="confirmCheckout" onClick={submitForm}>
+        Confirm Order
+      </button>
+    </div>
+  );
 }

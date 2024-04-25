@@ -273,3 +273,10 @@ export const logout = async (controller) => {
 export const getInfo = async (controller) => {
   return fetchData("@me", controller);
 };
+
+
+export const checkout = async (controller = new AbortController()) => {
+  return fetchData("checkout", controller, {
+    method: "POST",
+  });
+}
