@@ -5,44 +5,44 @@ import { useAuth } from "../context";
 import * as api from "../utils";
 
 export default function Checkout() {
+
   const [shoes, setShoes] = useState([]);
-  const [fakeRefresh, setRefresh] = useState("");
-
-  const cb = useCallback(async (controller) => {
-    const user1 = await api.getInfo(controller);
-    console.log(user1);
-
-    // const user1 = user;
-    if (user1 == null) return;
-    if (user1.cart == null) return;
-
-    let shoesArr = [];
-
-    await Promise.all(
-      user1.cart.map(async (id) => {
-        try {
-          const data = await api.getListing(id, controller);
-          if (data == null) return;
-          shoesArr.push(data);
-        } catch (err) {
-          if (err.name === "AbortError") {
-            console.log("Fetch aborted");
-          }
-          console.error(err);
-        }
-      })
-    );
-
-    shoesArr.sort((a, b) => a.id - b.id);
-
-    setShoes(shoesArr);
-  }, []);
+  const [userState, setUserState] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
-    cb(controller);
-    return () => controller.abort();
-  }, [cb]);
+    api.getInfo(controller)
+    .then(data => setUserState(data))
+    .catch(err => console.log(err))
+
+    return () => controller.abort()
+  }, []);
+
+  useEffect(() => {
+  	if(userState == null)
+  		return;
+
+  	const controller = new AbortController();
+
+  	userState.cart.forEach(e => {
+  		api.getListing(e, controller)
+  		.then(data => {
+  			if(data == null)
+  				return;
+
+  			setShoes(prev => {
+
+  				if(prev != null)
+  					return [...prev, data];
+  				else
+  					return [data];
+  			})
+  		})
+  		.catch(err => console.log(err));
+  	});
+
+  	return () => controller.abort()
+  }, [userState]);
 
   const handleDelete = (e, shoeId) => {
     e.preventDefault();
@@ -77,19 +77,26 @@ export default function Checkout() {
         <h2>Order Summary</h2>
         <p>A confirmation of the order will be sent to your email.</p>
         <div className="checkoutShoeGrid">
-          {shoes?.map((shoe) => (
-            <div className="shoeCard" key={shoe.id}>
-              <Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
-                <img src={shoe.sideview} alt={shoe.name} />
-              </Link>
-              <h2>{shoe.name}</h2>
-              <p>${shoe.price}</p>
-              <button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
-                Remove
-              </button>
-            </div>
-          ))}
-        </div>
+        {
+		  	shoes?.map((shoe) => {
+				if(shoe == null)
+					return;
+
+				return (
+					<div className="shoeCard" key={shoe.id}>
+						<Link className="shoecardbuttonlink" href={`/individualshoe?shoeId=${shoe.id}`} key={shoe.id}>
+						  <img src={shoe.sideview} alt={shoe.name} />
+						</Link>
+						<h2>{shoe.name}</h2>
+						<p>${shoe.price}</p>
+						<button className="deleteButton" onClick={(e) => handleDelete(e, shoe.id)}>
+						  Remove
+						</button>
+					</div>
+			  	);
+			})
+		}
+		</div>
       </div>
       <button className="confirmCheckout" onClick={submitForm}>
         Confirm Order
