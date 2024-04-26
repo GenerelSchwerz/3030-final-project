@@ -73,7 +73,7 @@ export default function Home() {
     <>
       <NavBar />
       <AddPopup />
-      <EditPopup shoe={editShoe} updateShoe={updateEditShoe} display={editShoe != null} onExit={onExit} />
+      <EditPopup shoe={editShoe} updateShoe={updateEditShoe} display={editShoe != null} onSubmit = {() => setEditShoe(null)} onExit={onExit} />
       <UserListings handleEdit={handleEdit} shoes={shoes} setShoes={setShoes} />
     </>
   );

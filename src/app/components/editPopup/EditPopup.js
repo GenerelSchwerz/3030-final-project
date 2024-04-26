@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import * as api from "../../utils";
 import "./EditPopup.css";
 
-export default function AddPopup({ shoe, updateShoe, display, onExit }) {
+export default function AddPopup({ shoe, updateShoe, display, onSubmit, onExit }) {
   const [shoeName, setShoeName] = useState("");
   const [description, setDescription] = useState("");
   const [model, setModel] = useState("");
@@ -58,8 +58,12 @@ export default function AddPopup({ shoe, updateShoe, display, onExit }) {
           description: description,
           id: shoe.id,
         });
+        onSubmit();
       })
-      .catch(console.error);
+      .catch(err => {
+        console.log(err);
+        setTitle("Invalid Input");
+  });
   };
 
   return (
