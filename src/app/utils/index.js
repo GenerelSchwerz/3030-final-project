@@ -26,8 +26,9 @@ const fetchData = async (uri, controller, opts = {}) => {
 
     if (!res.ok) {
       console.error(res);
-      console.error(await res.text());
-      throw new Error("Failed to fetch items");
+      let err = await res.text();
+      console.log(err);
+      throw new Error(err);
     }
 
     return await res.json();

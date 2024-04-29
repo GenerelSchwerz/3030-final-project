@@ -10,48 +10,19 @@ export default function LoginModal(props) {
 	const[sendRequest, setSendRequest] = useState(false);
 	const context = useAuth();
 
-	const onChangeUsername = event => {
-		setUsername(event.target.value);
-	}
-
-	const onChangePassword = event => {
-		setPassword(event.target.value);
-	}
-
 	const onSubmitForm = event => {
 		event.preventDefault();
-		console.log(event.target);
-		setSendRequest(true);
-	}
-
-	useEffect(() => {
-		if(!sendRequest) {
-			return;
-		}
-
-		const controller = new AbortController();
-		api.login(username, password, controller).then((data) => {
-      		console.log(data);
-			props.submitButtonHandler();
-			setSendRequest(false);
-			console.log(data)
+		api.login(username, password).then((data) => {
 			context.setLoggedIn(true, data.token);
 			context.setUser(data);
+			props.submitButtonHandler();
     	}).catch(err => {
-			if (err.name === "AbortError") {
-				console.log("Request Aborted");
-				return;
-			}
-			console.log(err);
-			setSendRequest(false);
 			context.setLoggedIn(false);
 			context.setUser(null)
+			alert(err);
+			console.log(err);
 		});
-
-		return () => {
-			controller.abort();
-	};
-	}, [sendRequest, username, password, context, props]);
+	}
 
     if (props.show) {
         return (
@@ -63,8 +34,8 @@ export default function LoginModal(props) {
                         </div>
                         <h1>Login</h1>
                         <form onSubmit={onSubmitForm}>
-                            <input type="text" placeholder="Username.." value={username} onChange={onChangeUsername}/> <br/>
-                            <input type="text" placeholder="Password.." value={password} onChange={onChangePassword}/> <br/>
+                            <input type="text" placeholder="Username.." value={username} onChange={(e) => setUsername(e.target.value)}/> <br/>
+                            <input type="text" placeholder="Password.." value={password} onChange={(e) => setPassword(e.target.value)}/> <br/>
                             <button type="submit" className="submitButton">Submit</button>
                         </form>
                         <p onClick={props.createAccountHandler}>Create An Account?</p>
