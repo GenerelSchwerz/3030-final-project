@@ -18,6 +18,10 @@ export default function Home() {
   const [editShoe, setEditShoe] = useState(null);
   const { loggedIn, user } = useAuth();
 
+  const refresh = () => {
+
+  }
+
   useEffect(() => {
     if (!loggedIn) {
       router.push("/");
@@ -25,27 +29,32 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (shoes != null && user != null) {
+    if (user == null) {
       return;
     }
 
     const controller = new AbortController();
 
-    if (user != null && shoes == null) {
-      api
-        .fetchUserListings(user.id, controller)
-        .then((data) => {
-          console.log(data);
-          setShoes(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [shoes, user]);
+    api
+      .fetchUserListings(user.id, controller)
+      .then((data) => {
+        console.log(data);
+        setShoes(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      return () => controller.abort()
+  }, [user]);
+
+  const handleAddItem = shoe => {
+    api.getListing(shoe.id)
+    .then(data => setShoes(prev => [...prev, data]))
+    .catch(err => console.log(err));
+  }
 
   const handleEdit = (shoe) => {
-    console.log("HI", shoe);
     setEditShoe(shoe);
   };
 
@@ -72,7 +81,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <AddPopup />
+      <AddPopup onSubmit={handleAddItem}/>
       <EditPopup shoe={editShoe} updateShoe={updateEditShoe} display={editShoe != null} onSubmit = {() => setEditShoe(null)} onExit={onExit} />
       <UserListings handleEdit={handleEdit} shoes={shoes} setShoes={setShoes} />
     </>

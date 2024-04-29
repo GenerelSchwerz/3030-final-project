@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import * as api from "../../utils"
 import "./AddPopup.css";
 
-export default function AddPopup() {
+export default function AddPopup(props) {
 
   const [shoeName, setShoeName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,53 +15,35 @@ export default function AddPopup() {
   const [frontview, setFrontView] = useState("");
   const [showModal, setShowModal] = useState("");
   const [title, setTitle] = useState("New Listing");
-  const [sendRequest, setSendRequest] = useState(false);
 
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-	setSendRequest(true);
-  };
+
+	const info = {
+		name: shoeName,
+		model: model,
+		price: parseFloat(price),
+		size: size,
+		topview: topview,
+		sideview: sideview,
+		frontview: frontview,
+		description: description
+	}
+
+	api.createListing(info).then((data) => {
+  		console.log(data);
+		setShowModal(false);
+		props.onSubmit(data);
+	}).catch(err => {
+		console.log(err);
+		setTitle("Error");
+	});
+};
 
   const onAddItemClick = event => {
 	setShowModal(!showModal);
   }
-
- 	useEffect(() => {
-		if(!sendRequest) {
-			return;
-		}
-
-		const info = {
-			name: shoeName,
-			model: model,
-			price: parseFloat(price),
-			size: size,
-			topview: topview,
-			sideview: sideview,
-			frontview: frontview,
-			description: description
-		}
-
-		const controller = new AbortController();
-		api.createListing(info, controller).then((data) => {
-      		console.log(data);
-			setSendRequest(false);
-			setShowModal(false);
-    	}).catch(err => {
-			console.log(err);
-			setTitle("Error");
-			setSendRequest(false);
-		});
-
-		setSendRequest(false);
-
-		return () => {
-			if(!sendRequest && controller != null) {
-				controller.abort();
-			}
-	};
-	}, [sendRequest, shoeName, description, price, size, topview, sideview, frontview]);
 
   return (
 	<>
